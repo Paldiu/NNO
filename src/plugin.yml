@@ -1,0 +1,160 @@
+name: OrangePenis
+description: Orange Penis.
+version: 6.66
+main: me.Paldiu.NNO.Main
+authors: [Paul Reilly / Paldiu, Zachary Weber / Smack17]
+
+commands:
+  anal:
+    description: Anal rape <3
+    usage: /<command> <player>
+  bhrp:
+    description: IS THIS THE REAL LIFE?
+    usage: /<command>
+  bpkick:
+    description: Used for developer bypass.
+    usage: /<command> <player>
+  bpban:
+    description: Used for developer bypass.
+    usage: /<command> <player>
+  bptp:
+    description: Used for developer bypass.
+    usage: /<command> <player>
+  chcl:
+    description: Clears your own chat.
+    usage: /<command>
+  chcln:
+    description: Clears your chat, without notification.
+    usage: /<command>
+  deafen:
+    description: Deafen.
+    usage: /<command>
+  devconf:
+    description:
+    usage: /<command>
+    aliases: [devme,confirm]
+  emsd:
+    description: Put the server into emergency shutdown mode.
+    usage: /<command>
+  meep:
+    description: Meep!
+    usage: /<command>
+  nno:
+    description: States the plugins version and description
+    usage: /<command>
+    aliases: orangepenis
+  ntoggle:
+    description: Toggle the plugin off.
+    usage: /<command>
+    aliases: ntg
+  onsa:
+    description: Onion Sandwich >:D
+    usage: /<command>
+  oral:
+    description: Preform oral.. NO NOT AN EXAM. THE DIRTY KIND.
+    usage: /<command> <player>
+  phyllis:
+    description: PHYLLIS FROM DENVAH
+    usage: /<command>
+  pong:
+    description: Pong!
+    usage: /<command>
+  rape:
+    description: Rape another player.
+    usage: /<command> <player>
+  special:
+    description: A special command just for you <3
+    usage: /<command>
+  swiggity:
+    description: Swiggity swoner!
+    usage: /<command>
+    aliases: swig
+  uall:
+    description: Undisguise all players.
+    usage: /<command>
+  virginia:
+    description: Virginia yourself or another Player
+    usage: /<command> [player]
+    aliases: [virg,spandex,vir]
+  
+permissions:
+  nonamedorg.*:
+    description: Gives you permissions for ALL commands
+    default: false
+    children:
+      nonamedorg.ntoggle: true
+      nonamedorg.virginia: true
+      nonamedorg.virginia.other: true
+      nonamedorg.devconf: true
+      nonamedorg.nno: true
+      nonamedorg.emsd: true
+      nonamedorg.swiggity: true
+      nonamedorg.anal: true
+      nonamedorg.pong: true
+      nonamedorg.special: true
+      nonamedorg.meep: true
+      nonamedorg.phyllis: true
+      nonamedorg.onsa: true
+      nonamedorg.bypass: true
+      nonamedorg.bhrp: true
+      nonamedorg.chatclear: true
+      nonamedorg.uall: true
+  nonamedorg.chatclear:
+    description: Permission to clear your own chat.
+    default: true
+  nonamedorg.uall:
+    description: Permission to use /uall
+    default: op
+  nonamedorg.ntoggle:
+    #This is unused, but left here for implementation anyway.
+    description: Permission to toggle the plugin off.
+    default: true
+  nonamedorg.virginia:
+    description: Permission to virginia yourself.
+    default: true
+  nonamedorg.virginia.other:
+    description: Permission to virginia others
+    default: op
+  nonamedorg.devconf:
+    #This is unused, but left here for implementation anyway.
+    description: Confirms you are the plugin developer
+    default: true
+  nonamedorg.nno:
+    description: Plugin description.
+    default: true
+  nonamedorg.emsd:
+    #This is unused, but left here for implementation anyway.
+    description: Permission to shutdown the server
+    default: false
+  nonamedorg.swiggity:
+    description: Permission to use /swiggity
+    default: true
+  nonamedorg.anal:
+    description: Permission for anal?
+    default: true
+  nonamedorg.pong:
+    description: Permission for pong
+    default: true
+  #This is unused, but left here for implementation anyway.
+  nonamedorg.special:
+    description: Permission to be special.
+    default: true
+  nonamedorg.phyllis:
+    description: Phyllis.
+    default: true
+  nonamedorg.meep:
+    description: Meep the fuck.
+    default: true
+  nonamedorg.onsa:
+    description: Be prepared for the ultimate onion sandwich >:D
+    default: true
+  nonamedorg.bhrp:
+    description: IS THIS THE REAL LIFE!?
+    default: true
+  #This is unused, but left here for implementation anyway.
+  nonamedorg.bypass:
+    description: null.
+    default: false
+  nonamedorg.deafen:
+    description: Deafen.
+    default: op
