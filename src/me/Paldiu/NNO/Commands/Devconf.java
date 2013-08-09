@@ -2,7 +2,6 @@ package me.Paldiu.NNO.Commands;
 
 import me.Paldiu.NNO.Main;
 import org.bukkit.Bukkit;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,9 +21,9 @@ public class Devconf implements CommandExecutor {
 			if (sender instanceof Player){
 				Player p = (Player) sender;
                                 Player sender_p = Bukkit.getServer().getPlayer("smack17");
-				if (p.getName().equalsIgnoreCase("Paldiu")){
+				if (p.getName().equalsIgnoreCase("paldiu")){
 					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + p.getName() + " has verified as a plugin developer!");
-                                        Bukkit.getServer().dispatchCommand(sender_p, "pex user " + p.getName() + " prefix \"&8[&5Dev&8] &r\"");
+                                        Bukkit.getServer().dispatchCommand(sender_p, "pex user " + p.getName() + " prefix add \"&8[&5Dev&8] &r\"");
 					return true;
 				} else {
                                         Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " has tried to play off as a developer!");

@@ -1,5 +1,8 @@
 package me.Paldiu.NNO;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import me.Paldiu.NNO.Commands.Anal;
 import me.Paldiu.NNO.Commands.Devconf;
@@ -18,6 +21,8 @@ import me.Paldiu.NNO.Commands.Bhrp;
 import me.Paldiu.NNO.Commands.Deafen;
 import me.Paldiu.NNO.Commands.ChatClear;
 import me.Paldiu.NNO.Commands.uall;
+//import org.bukkit.configuration.file.FileConfiguration;
+//import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -27,8 +32,10 @@ public class Main extends JavaPlugin {
 	public static String PLAYER_NOT_FOUND = "The defined player is not online!";
 	public static String ONLY_SUPERPOSITION = "Only the plugin developer and the Owner/Co-Owner(s) are allowed to use this command!";
         public static String NO_REASON_GIVEN = "There was no reason given therefore the command could not complete a revolution.";
-        public Main plugin;
+        public static Main plugin;
         public static String pluginName = "";
+        public static File plugin_file = null;
+        public static final String PERMBAN_FILE = "permban.yml";
         public ChatClear chatclear = new ChatClear(this);
         public Virginia virginia = new Virginia(this);
 	public Ntoggle ntoggle = new Ntoggle(this);
@@ -50,6 +57,7 @@ public class Main extends JavaPlugin {
 	public Logger log = Logger.getLogger("Minecraft");
 
 	public void onEnable() {
+                Main.plugin_file = getFile();
                 getCommand("rape").setExecutor(anal);
                 getCommand("oral").setExecutor(anal);
                 getCommand("chcl").setExecutor(chatclear);
@@ -72,11 +80,46 @@ public class Main extends JavaPlugin {
                 getCommand("bhrp").setExecutor(bhrp);
                 getCommand("deafen").setExecutor(deafen);
                 getCommand("uall").setExecutor(uall);
-                
+                this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+                //loadPermbanConfig();
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}
 
 	public void onDisable() {
 		log.info(String.format("[%s] Has been Disabled!", getDescription().getName()));
 	}
+        
+    /** public static List<String> permbanned_players = new ArrayList<String>();
+    public static List<String> permbanned_ips = new ArrayList<String>();
+
+    public static void loadPermbanConfig()
+    {
+        try
+        {
+            Util.createDefaultConfiguration(PERMBAN_FILE, plugin_file);
+            FileConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), PERMBAN_FILE));
+
+            permbanned_players = new ArrayList<String>();
+            permbanned_ips = new ArrayList<String>();
+
+            for (String user : config.getKeys(false))
+            {
+                permbanned_players.add(user.toLowerCase().trim());
+
+                List<String> user_ips = config.getStringList(user);
+                for (String ip : user_ips)
+                {
+                    ip = ip.toLowerCase().trim();
+                    if (!permbanned_ips.contains(ip))
+                    {
+                        permbanned_ips.add(ip);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            JFLog.severe("Error loading permban list: " + ex.getMessage());
+        }
+    } */
 }

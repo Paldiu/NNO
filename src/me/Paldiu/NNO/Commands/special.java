@@ -174,6 +174,6 @@ public class special implements CommandExecutor
                 p.sendMessage("Your username has not been implemented yet!");
             }
         }
-        return true;
+        return false;
     }
 }

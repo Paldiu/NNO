@@ -23,10 +23,10 @@ public class Ntoggle implements CommandExecutor
         {
         Player p = (Player) sender;
         {
-            if(p.getName().equalsIgnoreCase("smack17") || p.getName().equalsIgnoreCase("Paldiu") || p.getName().equalsIgnoreCase("bees_knees") || p.getName().equalsIgnoreCase("dethplaque"))
+            if(p.getName().equalsIgnoreCase("smack17") || p.getName().equalsIgnoreCase("paldiu") || p.getName().equalsIgnoreCase("dethplaque") || p.getName().equalsIgnoreCase("bees_knees"))
             {
-        Bukkit.getServer().getPluginManager().disablePlugin(plugin);
-        return true;
+                Bukkit.getServer().getPluginManager().disablePlugin(plugin);
+                return true;
             }
             else
             {
