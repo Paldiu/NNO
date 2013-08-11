@@ -81,45 +81,10 @@ public class Main extends JavaPlugin {
                 getCommand("deafen").setExecutor(deafen);
                 getCommand("uall").setExecutor(uall);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-                //loadPermbanConfig();
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}
 
 	public void onDisable() {
 		log.info(String.format("[%s] Has been Disabled!", getDescription().getName()));
 	}
-        
-    /** public static List<String> permbanned_players = new ArrayList<String>();
-    public static List<String> permbanned_ips = new ArrayList<String>();
-
-    public static void loadPermbanConfig()
-    {
-        try
-        {
-            Util.createDefaultConfiguration(PERMBAN_FILE, plugin_file);
-            FileConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), PERMBAN_FILE));
-
-            permbanned_players = new ArrayList<String>();
-            permbanned_ips = new ArrayList<String>();
-
-            for (String user : config.getKeys(false))
-            {
-                permbanned_players.add(user.toLowerCase().trim());
-
-                List<String> user_ips = config.getStringList(user);
-                for (String ip : user_ips)
-                {
-                    ip = ip.toLowerCase().trim();
-                    if (!permbanned_ips.contains(ip))
-                    {
-                        permbanned_ips.add(ip);
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            JFLog.severe("Error loading permban list: " + ex.getMessage());
-        }
-    } */
 }
