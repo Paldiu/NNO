@@ -24,14 +24,31 @@ public class Pong implements CommandExecutor
             Player p = (Player) sender;
             if (p.hasPermission("nonamedorg.pong"))
             {
-            Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + "I heard " + p.getName() + " likes little Asian boys.");
+                Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + "I heard " + p.getName() + " likes little Asian boys.");
+                return true;
             }
             else
             {
                 p.sendMessage(Main.MSG_NO_PERMS);
+                return true;
             }
         }
         
-        return true;
+        if (commandLabel.equalsIgnoreCase("grogger"))
+        {
+            Player p = (Player) sender;
+            if (p.hasPermission("nonamedorg.grogger"))
+            {
+                Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " is a horny grogger!");
+                return true;
+            }
+            else
+            {
+                p.sendMessage(Main.MSG_NO_PERMS);
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

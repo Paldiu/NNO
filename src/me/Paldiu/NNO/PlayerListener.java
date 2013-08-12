@@ -2,8 +2,7 @@ package me.Paldiu.NNO;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -12,7 +11,7 @@ public class PlayerListener implements Listener
     public Main plugin;
     
     @EventHandler
-    public void onPlayerJoinEvent(final PlayerLoginEvent e)
+    public void onPlayerJoinEvent(final PlayerJoinEvent e)
     {
         if (e.getPlayer().getName().equalsIgnoreCase("Paldiu"))
         {

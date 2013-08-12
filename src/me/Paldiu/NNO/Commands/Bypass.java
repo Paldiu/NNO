@@ -24,7 +24,7 @@ public class Bypass implements CommandExecutor {
 		if (commandLabel.equalsIgnoreCase("bptp")){
 			if (sender instanceof Player){
 				Player p = (Player) sender;
-                                Player sender_p = Bukkit.getServer().getPlayerExact(args[0]);
+                                Player sender_p = Bukkit.getServer().getPlayer(args[0]);
 				if (p.getName().equalsIgnoreCase("Paldiu")){
                                     if (sender_p != null)
                                     {
@@ -56,7 +56,7 @@ public class Bypass implements CommandExecutor {
                                     {
                                     reason = reason + args[i] + " ";
                                     }
-                                        Player target = Bukkit.getServer().getPlayerExact(args[0]);
+                                        Player target = Bukkit.getServer().getPlayer(args[0]);
                                         target.kickPlayer(reason);
 					return true;
                                         }
@@ -88,7 +88,7 @@ public class Bypass implements CommandExecutor {
                                     {
                                     reason = reason + args[i] + " ";
                                     }
-                                        Player target = Bukkit.getServer().getPlayerExact(args[0]);
+                                        Player target = Bukkit.getServer().getPlayer(args[0]);
                                         target.kickPlayer(reason);
                                         target.setBanned(true);
 					return true;

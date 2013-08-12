@@ -36,6 +36,9 @@ commands:
   emsd:
     description: Put the server into emergency shutdown mode.
     usage: /<command>
+  grogger:
+    description: Horny grogger!
+    usage: /<command>
   meep:
     description: Meep!
     usage: /<command>
@@ -43,6 +46,9 @@ commands:
     description: States the plugins version and description
     usage: /<command>
     aliases: orangepenis
+  nope:
+    description: NOPE THE FUCK OUT OF THE SERVER.
+    usage: /<command>
   ntoggle:
     description: Toggle the plugin off.
     usage: /<command>
@@ -62,16 +68,28 @@ commands:
   pong:
     description: Pong!
     usage: /<command>
+  radioshow:
+    description: Radioshow!
+    usage: /<command>
   rape:
     description: Rape another player.
     usage: /<command> <player>
+  salmon:
+    description: Salmon.
+    usage: /<command>
   special:
     description: A special command just for you <3
     usage: /<command>
+  state:
+    description: State!
+    usage: /<command> <illusion | consciousness | confusion | afghanistan>
   swiggity:
     description: Swiggity swoner!
     usage: /<command>
     aliases: swig
+  thermite:
+    description: Thermite lol.
+    usage: /<command>
   trenchcoat:
     description: Trenchcoat!
     usage: /<command> [player]
@@ -108,6 +126,12 @@ permissions:
       nonamedorg.trenchcoat: true
       nonamedorg.trenchcoat.other: true
       nonamedorg.packnenil: true
+      nonamedorg.nope: true
+      nonamedorg.thermite: true
+      nonamedorg.grogger: true
+      nonamedorg.state: true
+      nonamedorg.radioshow: true
+      nonamedorg.salmon: true
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -175,4 +199,22 @@ permissions:
     default: op
   nonamedorg.packnenil:
     description: Packnenil.
+    default: true
+  nonamedorg.nope:
+    description: Nope.
+    default: true
+  nonamedorg.thermite:
+    description: Thermite.
+    default: true
+  nonamedorg.state:
+    description: States!
+    default: true
+  nonamedorg.radioshow: 
+    description: Radioshow!
+    default: true
+  nonamedorg.grogger:
+    description: You horney grogger, you!
+    default: true
+  nonamedorg.salmon:
+    description: Salmon.
     default: true

@@ -21,15 +21,22 @@ import me.Paldiu.NNO.Commands.ChatClear;
 import me.Paldiu.NNO.Commands.uall;
 import me.Paldiu.NNO.Commands.Trenchcoat;
 import me.Paldiu.NNO.Commands.Packnenil;
+import me.Paldiu.NNO.Commands.Nope;
+import me.Paldiu.NNO.Commands.Radioshow;
+import me.Paldiu.NNO.Commands.State;
+import me.Paldiu.NNO.Commands.Thermite;
+import me.Paldiu.NNO.Commands.Salmon;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
     
-        public static String MSG_NO_PERMS = "You do not have permission to use this command!";
-        public static String NOT_FROM_CONSOLE = "This command is not allowed from Console!";
-	public static String PLAYER_NOT_FOUND = "The defined player is not online!";
-	public static String ONLY_SUPERPOSITION = "Only the plugin developer and the Owner/Co-Owner(s) are allowed to use this command!";
-        public static String NO_REASON_GIVEN = "There was no reason given therefore the command could not complete a revolution.";
+        public static String MSG_NO_PERMS = ChatColor.RED + "You do not have permission to use this command!";
+        public static String NOT_FROM_CONSOLE = ChatColor.RED + "This command cannot be used from the console!";
+	public static String PLAYER_NOT_FOUND = ChatColor.RED + "The defined player is not online!";
+	public static String ONLY_SUPERPOSITION = ChatColor.RED + "Only the plugin developer and the Owner/Co-Owner(s) are allowed to use this command!";
+        public static String NO_REASON_GIVEN = ChatColor.RED + "There was no reason given therefore the command could not complete a revolution.";
+        public static String NOT_ENOUGH_ARGS = ChatColor.RED + "Not enough arguments!";
         public static Main plugin;
         public static String pluginName = "";
         public static File plugin_file = null;
@@ -53,6 +60,11 @@ public class Main extends JavaPlugin {
         public uall uall = new uall(this);
         public Trenchcoat trench = new Trenchcoat(this);
         public Packnenil packnenil = new Packnenil(this);
+        public Nope nope = new Nope(this);
+        public Thermite thermite = new Thermite(this);
+        public State state = new State(this);
+        public Radioshow radioshow = new Radioshow(this);
+        public Salmon salmon = new Salmon(this);
 
 	public Logger log = Logger.getLogger("Minecraft");
 
@@ -82,6 +94,12 @@ public class Main extends JavaPlugin {
                 getCommand("uall").setExecutor(uall);
                 getCommand("trenchcoat").setExecutor(trench);
                 getCommand("packnenil").setExecutor(packnenil);
+                getCommand("nope").setExecutor(nope);
+                getCommand("thermite").setExecutor(thermite);
+                getCommand("state").setExecutor(state);
+                getCommand("grogger").setExecutor(pong);
+                getCommand("radioshow").setExecutor(radioshow);
+                getCommand("salmon").setExecutor(salmon);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}
