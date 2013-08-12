@@ -1,8 +1,6 @@
 package me.Paldiu.NNO;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 import me.Paldiu.NNO.Commands.Anal;
 import me.Paldiu.NNO.Commands.Devconf;
@@ -21,8 +19,8 @@ import me.Paldiu.NNO.Commands.Bhrp;
 import me.Paldiu.NNO.Commands.Deafen;
 import me.Paldiu.NNO.Commands.ChatClear;
 import me.Paldiu.NNO.Commands.uall;
-//import org.bukkit.configuration.file.FileConfiguration;
-//import org.bukkit.configuration.file.YamlConfiguration;
+import me.Paldiu.NNO.Commands.Trenchcoat;
+import me.Paldiu.NNO.Commands.Packnenil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -53,6 +51,8 @@ public class Main extends JavaPlugin {
         public Bhrp bhrp = new Bhrp(this);
         public Deafen deafen = new Deafen(this);
         public uall uall = new uall(this);
+        public Trenchcoat trench = new Trenchcoat(this);
+        public Packnenil packnenil = new Packnenil(this);
 
 	public Logger log = Logger.getLogger("Minecraft");
 
@@ -80,6 +80,8 @@ public class Main extends JavaPlugin {
                 getCommand("bhrp").setExecutor(bhrp);
                 getCommand("deafen").setExecutor(deafen);
                 getCommand("uall").setExecutor(uall);
+                getCommand("trenchcoat").setExecutor(trench);
+                getCommand("packnenil").setExecutor(packnenil);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}

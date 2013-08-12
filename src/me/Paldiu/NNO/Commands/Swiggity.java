@@ -24,21 +24,18 @@ public class Swiggity implements CommandExecutor
             if (sender instanceof Player)
             {
                 Player p = (Player) sender;
-                if (args.length == 0)
+                if (sender.hasPermission("nonamedorg.swiggity"))
                 {
-                    if (sender.hasPermission("nonamedorg.swiggity"))
-                    {
-                        Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Swiggity swoner " + p.getName() + " has a boner!");
-                        return true;
-                    }
-                    else
-                    {
-                        p.sendMessage(Main.MSG_NO_PERMS);
-                        return true;
-                    }
+                    Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Swiggity swoner " + p.getName() + " has a boner!");
+                    return true;
+                }
+                else
+                {
+                    p.sendMessage(Main.MSG_NO_PERMS);
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 }

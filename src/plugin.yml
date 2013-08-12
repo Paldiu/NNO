@@ -53,6 +53,9 @@ commands:
   oral:
     description: Preform oral.. NO NOT AN EXAM. THE DIRTY KIND.
     usage: /<command> <player>
+  packnenil:
+    description: Packnenil :3
+    usage: /<command>
   phyllis:
     description: PHYLLIS FROM DENVAH
     usage: /<command>
@@ -69,6 +72,9 @@ commands:
     description: Swiggity swoner!
     usage: /<command>
     aliases: swig
+  trenchcoat:
+    description: Trenchcoat!
+    usage: /<command> [player]
   uall:
     description: Undisguise all players.
     usage: /<command>
@@ -99,6 +105,9 @@ permissions:
       nonamedorg.bhrp: true
       nonamedorg.chatclear: true
       nonamedorg.uall: true
+      nonamedorg.trenchcoat: true
+      nonamedorg.trenchcoat.other: true
+      nonamedorg.packnenil: true
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -158,3 +167,12 @@ permissions:
   nonamedorg.deafen:
     description: Deafen.
     default: op
+  nonamedorg.trenchcoat:
+    description: Give a trenchcoat to yourself.
+    default: true
+  nonamedorg.trenchcoat.other:
+    description: Give a trenchcoat to another player.
+    default: op
+  nonamedorg.packnenil:
+    description: Packnenil.
+    default: true
