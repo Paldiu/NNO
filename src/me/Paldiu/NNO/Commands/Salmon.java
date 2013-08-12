@@ -28,10 +28,7 @@ public class Salmon implements CommandExecutor
                 Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.salmon"))
                 {
-                    Location l = p.getLocation();
-                    l.setY(132);
-                    p.teleport(l);
-                    p.setVelocity(new Vector(0, 10, 0));
+                    p.setVelocity(new Vector(7, 5, 7));
                     Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " was slapped by a wet salmon.");
                     p.setHealth(20);
                     p.damage(3);
