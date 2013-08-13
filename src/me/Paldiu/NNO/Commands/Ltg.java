@@ -1,19 +1,16 @@
 package me.Paldiu.NNO.Commands;
 
 import me.Paldiu.NNO.Main;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
+import me.Paldiu.NNO.Util;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
-public class Salmon implements CommandExecutor
+public class Ltg implements CommandExecutor
 {
     public Main plugin;
-    public Salmon(Main instance)
+    public Ltg(Main instance) 
     {
         plugin = instance;
     }
@@ -21,17 +18,14 @@ public class Salmon implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (commandLabel.equalsIgnoreCase("salmon"))
+        if (commandLabel.equalsIgnoreCase("ltg"))
         {
+            Player p = (Player) sender;
             if (sender instanceof Player)
             {
-                Player p = (Player) sender;
-                if (p.hasPermission("nonamedorg.salmon"))
+                if (p.hasPermission("nonamedorg.ltg"))
                 {
-                    p.setVelocity(new Vector(7,5,13));
-                    Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " was slapped by a wet salmon.");
-                    p.setHealth(20);
-                    p.damage(3);
+                    Util.bcastMsg(p.getName() + " has just lost the game!");
                     return true;
                 }
                 else

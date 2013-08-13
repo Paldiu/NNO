@@ -25,7 +25,10 @@ import me.Paldiu.NNO.Commands.Nope;
 import me.Paldiu.NNO.Commands.Radioshow;
 import me.Paldiu.NNO.Commands.State;
 import me.Paldiu.NNO.Commands.Thermite;
+import me.Paldiu.NNO.Commands.Gold;
 import me.Paldiu.NNO.Commands.Salmon;
+import me.Paldiu.NNO.Commands.Ltg;
+import me.Paldiu.NNO.Commands.Lockdown;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -40,7 +43,7 @@ public class Main extends JavaPlugin {
         public static Main plugin;
         public static String pluginName = "";
         public static File plugin_file = null;
-        public static final String PERMBAN_FILE = "permban.yml";
+        public static boolean lockdownMode = false;
         public ChatClear chatclear = new ChatClear(this);
         public Virginia virginia = new Virginia(this);
 	public Ntoggle ntoggle = new Ntoggle(this);
@@ -65,6 +68,9 @@ public class Main extends JavaPlugin {
         public State state = new State(this);
         public Radioshow radioshow = new Radioshow(this);
         public Salmon salmon = new Salmon(this);
+        public Gold gold = new Gold(this);
+        public Ltg ltg = new Ltg(this);
+        public Lockdown lockdown = new Lockdown(this);
 
 	public Logger log = Logger.getLogger("Minecraft");
 
@@ -100,6 +106,9 @@ public class Main extends JavaPlugin {
                 getCommand("grogger").setExecutor(pong);
                 getCommand("radioshow").setExecutor(radioshow);
                 getCommand("salmon").setExecutor(salmon);
+                getCommand("gold").setExecutor(gold);
+                getCommand("ltg").setExecutor(ltg);
+                getCommand("lockdown").setExecutor(lockdown);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}

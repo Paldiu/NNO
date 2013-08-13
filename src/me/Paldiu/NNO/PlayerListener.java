@@ -5,6 +5,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerLoginEvent.Result;
 
 public class PlayerListener implements Listener
 {
@@ -27,10 +31,24 @@ public class PlayerListener implements Listener
         }
         else if (e.getPlayer().getName().equalsIgnoreCase("austindapro") || e.getPlayer().getName().equalsIgnoreCase("mustardbukkit") || e.getPlayer().getName().equalsIgnoreCase("nerdygirl544") || e.getPlayer().getName().equalsIgnoreCase("soccerkiff") || e.getPlayer().getName().equalsIgnoreCase("spartan12233th"))
         {
-            Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " is an " + ChatColor.GOLD + " Admin" + ChatColor.AQUA + ".");
+            Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " is an " + ChatColor.GOLD + "Admin" + ChatColor.AQUA + ".");
         }
         else
         {
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerLogin(PlayerLoginEvent event)
+    {
+        Player player = event.getPlayer();
+        if (Main.lockdownMode)
+        {
+            if (Util.isNewPlayer(player))
+            {
+                event.setResult(Result.KICK_BANNED);
+                event.setKickMessage(ChatColor.RED + "Server is currently in lockdown mode, please come back in a few minutes.");
+            }
         }
     }
 }

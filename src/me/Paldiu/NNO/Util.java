@@ -7,6 +7,10 @@ import java.io.InputStream;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 
 public class Util
 {
@@ -84,4 +88,37 @@ public class Util
         }
     }
     
+    public static void bcastMsg(String message, ChatColor color)
+    {
+        JFLog.info(message, true);
+
+        for (Player p : Bukkit.getOnlinePlayers())
+        {
+            p.sendMessage((color == null ? "" : color) + message);
+        }
+    }
+
+    public static void bcastMsg(String message)
+    {
+        Util.bcastMsg(message, null);
+    }
+
+    public static void adminAction(Player adminName, String action, boolean isRed)
+    {
+        Util.bcastMsg(adminName + " - " + action, (isRed ? ChatColor.RED : ChatColor.AQUA));
+    }
+
+    public static boolean isNewPlayer(Player player)
+    {
+        OfflinePlayer[] offlinePlayers = Bukkit.getServer().getOfflinePlayers();
+        boolean newPlayer = true;
+        for (OfflinePlayer offlinePlayer : offlinePlayers)
+        {
+            if (offlinePlayer.getName().equals(player.getName()))
+            {
+                newPlayer = false;
+            }
+        }
+        return newPlayer;
+    }
 }

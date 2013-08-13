@@ -1,6 +1,6 @@
 name: OrangePenis
 description: Have you ever seen a nine inch dick?
-version: 6.66
+version: 4.12
 main: me.Paldiu.NNO.Main
 author: Paldiu
 
@@ -36,8 +36,17 @@ commands:
   emsd:
     description: Put the server into emergency shutdown mode.
     usage: /<command>
+  gold:
+    description: For those pesky sky fags.
+    usage: /<command> <player>
   grogger:
     description: Horny grogger!
+    usage: /<command>
+  lockdown:
+    description: Lock down the server.
+    usage: /<command> <on | off>
+  ltg:
+    description: Lol.
     usage: /<command>
   meep:
     description: Meep!
@@ -132,6 +141,9 @@ permissions:
       nonamedorg.state: true
       nonamedorg.radioshow: true
       nonamedorg.salmon: true
+      nonamedorg.gold: true
+      nonamedorg.ltg: true
+      nonamedorg.lockdown: true
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -218,3 +230,12 @@ permissions:
   nonamedorg.salmon:
     description: Salmon.
     default: true
+  nonamedorg.gold:
+    description: Gold.
+    default: op
+  nonamedorg.ltg:
+    description: Lol.
+    default: true
+  nonamedorg.lockdown:
+    description: Lockdown.
+    default: op
