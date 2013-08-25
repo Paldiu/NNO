@@ -29,7 +29,7 @@ public class Deafen implements CommandExecutor
         for (final Player p : Bukkit.getServer().getOnlinePlayers())
         if (commandLabel.equalsIgnoreCase("deafen"))
         {
-            if(player.hasPermission("nonamedorg.deafen"))
+            if (player.hasPermission("nonamedorg.deafen"))
             for (double percent = 0.0; percent <= 1.0; percent += (1.0 / STEPS))
             {
                 final float pitch = (float) (percent * 2.0);
@@ -42,6 +42,11 @@ public class Deafen implements CommandExecutor
                         p.playSound(randomOffset(p.getLocation(), 5.0), Sound.values()[random.nextInt(Sound.values().length)], 100.0f, pitch);
                     }
                 }.runTaskLater(plugin, Math.round(20.0 * percent * 2.0));
+            }
+            else
+            {
+                Main.noPermission(p);
+                return true;
             }
         }
 

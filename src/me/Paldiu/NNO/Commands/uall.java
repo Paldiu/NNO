@@ -30,7 +30,9 @@ public class uall implements CommandExecutor
                    Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + ": Undisguising all players");
                    DCBridge.getInstance().undisguiseAllPlayers();
                    return true;
-                } else { p.sendMessage(Main.MSG_NO_PERMS); }
+                } else { Main.noPermission(p);
+                return true;
+                }
             } else {
                    Bukkit.getServer().broadcastMessage(ChatColor.RED + "CONSOLE: Undisguising all players");
                    DCBridge.getInstance().undisguiseAllPlayers();

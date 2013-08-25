@@ -28,15 +28,16 @@ public class Salmon implements CommandExecutor
                 Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.salmon"))
                 {
-                    p.setVelocity(new Vector(7,5,13));
+                    p.setVelocity(new Vector(7,2,7));
                     Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " was slapped by a wet salmon.");
+                    p.setMaxHealth(20);
                     p.setHealth(20);
                     p.damage(3);
                     return true;
                 }
                 else
                 {
-                    p.sendMessage(Main.MSG_NO_PERMS);
+                    Main.noPermission(p);
                     return true;
                 }
             }

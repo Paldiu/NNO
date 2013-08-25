@@ -1,17 +1,17 @@
 package me.Paldiu.NNO.Commands;
 
 import me.Paldiu.NNO.Main;
-import org.bukkit.Bukkit;
+import me.Paldiu.NNO.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Swiggity implements CommandExecutor
+public class Ricardo implements CommandExecutor
 {
     public Main plugin;
-    public Swiggity(Main instance)
+    public Ricardo(Main instance)
     {
         plugin = instance;
     }
@@ -19,14 +19,15 @@ public class Swiggity implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if(commandLabel.equalsIgnoreCase("swiggity") || commandLabel.equalsIgnoreCase("swig"))
+        if (commandLabel.equalsIgnoreCase("ricardo"))
         {
             if (sender instanceof Player)
             {
                 Player p = (Player) sender;
-                if (sender.hasPermission("nonamedorg.swiggity"))
+                if (p.hasPermission("nonamedorg.ricardo"))
                 {
-                    Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Swiggity swoner " + p.getName() + " has a boner!");
+                    Util.bcastMsg(p.getName() + "'s real name isn't actually " + p.getName() + ", its really Ricardo!", ChatColor.BLUE);
+                    p.setDisplayName(ChatColor.RED + "Ricardo");
                     return true;
                 }
                 else
@@ -35,7 +36,12 @@ public class Swiggity implements CommandExecutor
                     return true;
                 }
             }
+            else
+            {
+                sender.sendMessage(Main.NOT_FROM_CONSOLE);
+                return true;
+            }
         }
-        return false;
+        return true;
     }
 }

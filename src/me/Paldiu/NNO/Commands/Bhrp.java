@@ -19,22 +19,34 @@ public class Bhrp implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        Player p = (Player) sender;
         if (commandLabel.equalsIgnoreCase("bhrp"))
         {
-            if (p.hasPermission("nonamedorg.bhrp"))
+            if (sender instanceof Player)
+            {
+                Player p = (Player) sender;
+                if (p.hasPermission("nonamedorg.bhrp"))
+                {
+                    Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "Is this the real life?");
+                    Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "Is this just fantasy?");
+                    Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "Caught in a landslide");
+                    Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "No escape from reality...");
+                }
+                else
+                {
+                    Main.noPermission(p);
+                }
+                
+                return true;
+            }
+            else
             {
                 Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "Is this the real life?");
                 Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "Is this just fantasy?");
                 Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "Caught in a landslide");
                 Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "No escape from reality...");
-                return true;
             }
-            else
-            {
-                p.sendMessage(Main.MSG_NO_PERMS);
-                return true;
-            }
+            
+            return true;
         }
         return false;
     }

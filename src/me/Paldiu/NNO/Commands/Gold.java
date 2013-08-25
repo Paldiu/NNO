@@ -3,6 +3,7 @@ package me.Paldiu.NNO.Commands;
 import me.Paldiu.NNO.Main;
 import me.Paldiu.NNO.Util;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,33 +24,34 @@ public class Gold implements CommandExecutor
         if (commandLabel.equalsIgnoreCase("gold"))
         {
             Player p = (Player) sender;
-            if (args.length == 1)
+            if (p.hasPermission("nonamedorg.gold"))
             {
-                if (p.hasPermission("nonamedorg.gold"))
+                if (args.length == 1)
                 {
                     final Player target = Bukkit.getServer().getPlayer(args[0]);
-                    Util.adminAction(p, "GOLD'ing " + target.getName() + ".", true);
+                    Util.bcastMsg(ChatColor.RED + p.getName() +  " - GOLD'ing " + target.getName() + ".");
                 
                     new BukkitRunnable()
                     {
                         @Override
                         public void run()
                         {
-                            target.kickPlayer("IT'S GOLD NOT BUDDER OR BUTTER YOU SKYFAG");
-                            Util.bcastMsg(target.getName() + " is a sky fan!");
+                            target.setHealth(0);
+                            target.sendMessage(ChatColor.RED + "IT'S GOLD NOT BUDDER OR BUTTER YOU SKYFAG");
+                            Util.bcastMsg(ChatColor.RED + target.getName() + " is a Sky fan -_-");
                         }
-                    }.runTaskLater(plugin, 20L * 2L);
+                    }.runTaskLater(plugin, 5L * 2L);
                     return true;
                 }
                 else
                 {
-                    p.sendMessage(Main.MSG_NO_PERMS);
+                    p.sendMessage(Main.NOT_ENOUGH_ARGS);
                     return true;
                 }
             }
             else
             {
-                p.sendMessage(Main.NOT_ENOUGH_ARGS);
+                Main.noPermission(p);
                 return true;
             }
         }

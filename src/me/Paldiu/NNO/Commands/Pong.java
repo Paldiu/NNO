@@ -29,7 +29,7 @@ public class Pong implements CommandExecutor
             }
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                Main.noPermission(p);
                 return true;
             }
         }
@@ -44,7 +44,7 @@ public class Pong implements CommandExecutor
             }
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                Main.noPermission(p);
                 return true;
             }
         }

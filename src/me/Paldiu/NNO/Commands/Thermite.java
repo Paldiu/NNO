@@ -23,9 +23,9 @@ public class Thermite implements CommandExecutor
     {
         if (commandLabel.equalsIgnoreCase("thermite"))
         {
-            Player p = (Player) sender;
             if (sender instanceof Player)
             {
+                Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.thermite"))
                 {
                     Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " has just stuck thermite up their ass!");
@@ -36,14 +36,14 @@ public class Thermite implements CommandExecutor
                         for (int z = -1; z <= 1; z++)
                         {
                             final Location explosion = new Location(w, l.getBlockX() + x, l.getBlockY(), l.getBlockZ() + z);
-                            w.createExplosion(explosion, 3);
+                            w.createExplosion(explosion, 0);
                         }
                     }
                     return true;
                 }
                 else
                 {
-                    p.sendMessage(Main.MSG_NO_PERMS);
+                    Main.noPermission(p);
                     return true;
                 }
             }

@@ -16,6 +16,7 @@ public class Virginia implements CommandExecutor {
 		plugin = instance;
 	}
 
+        @Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 			String[] args) {
 		if(commandLabel.equalsIgnoreCase("virginia") || commandLabel.equalsIgnoreCase("virg") || commandLabel.equalsIgnoreCase("spandex") || commandLabel.equalsIgnoreCase("vir")){
@@ -25,7 +26,7 @@ public class Virginia implements CommandExecutor {
 					if (sender.hasPermission("nonamedorg.virginia")){
 						Bukkit.getServer().broadcastMessage(ChatColor.GREEN + sender.getName() + "!!! Hanging out with little boys in spandex I see!!!");
 					} else {
-						player.sendMessage(Main.MSG_NO_PERMS);
+						Main.noPermission(sender);
 						return true;
 					}
 				}
@@ -40,7 +41,7 @@ public class Virginia implements CommandExecutor {
 							return true;
 						}
 					} else {
-						player.sendMessage(Main.MSG_NO_PERMS);
+						Main.noPermission(sender);
 						return true;
 					}
 				}
@@ -52,10 +53,4 @@ public class Virginia implements CommandExecutor {
 		}
 		return false;
 	}
-
-	public String parseColors(String name){
-        String coloredName = ChatColor.translateAlternateColorCodes('&', name);
-        return coloredName;
-        }  
-
 }

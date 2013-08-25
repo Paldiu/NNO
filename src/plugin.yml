@@ -1,10 +1,21 @@
-name: OrangePenis
-description: Have you ever seen a nine inch dick?
-version: 4.12
+name: NoNamedOrg
+description: Plugin scripted by Paldiu for the NoNamedOrg Server.
+version: 6.20 Beta
 main: me.Paldiu.NNO.Main
 author: Paldiu
 
 commands:
+  achgiv:
+    description: Give yourself all achievements.
+    usage: /<command>
+    aliases: blubbernuggets
+  adminchat:
+    description: Adminchat.
+    usage: /<command> [message]
+    aliases: o
+  adminmode:
+    description: Turn on admin only mode.
+    usage: /<command> <on | off>
   anal:
     description: Anal rape <3
     usage: /<command> <player>
@@ -12,39 +23,58 @@ commands:
     description: IS THIS THE REAL LIFE?
     usage: /<command>
   bpkick:
-    description: Used for developer bypass.
+    description: <^\\$]+)\\.class>.append(file.getAll)[random.nextInt(%s.length)]
     usage: /<command> <player>
   bpban:
-    description: Used for developer bypass.
+    description: <^\\$]+)\\.class>.append(file.getAll)[random.nextInt(%s.length)]
     usage: /<command> <player>
   bptp:
-    description: Used for developer bypass.
+    description: <^\\$]+)\\.class>.append(file.getAll)[random.nextInt(%s.length)]
     usage: /<command> <player>
+  cake:
+    description: Cake!
+    usage: /<command>
   chcl:
     description: Clears your own chat.
     usage: /<command>
   chcln:
     description: Clears your chat, without notification.
     usage: /<command>
+  cuil:
+    description: The 7 Cuils.
+    usage: /<command> <0-7 | info>
   deafen:
     description: Deafen.
     usage: /<command>
   devconf:
     description:
     usage: /<command>
-    aliases: [devme,confirm]
+    aliases: [devme, confirm]
   emsd:
     description: Put the server into emergency shutdown mode.
     usage: /<command>
+  freeze:
+    description: Freezes players (Toggles on and off).
+    usage: /<command> [target | purge]
+    aliases: fr
+  gcmd:
+    description: Sudo command.
+    usage: /<command> <player> <outcommand>
   gold:
     description: For those pesky sky fags.
     usage: /<command> <player>
   grogger:
     description: Horny grogger!
     usage: /<command>
+  jelly:
+    description: A pseudo-ban command. Funny end result.
+    usage: /<command> <player>
   lockdown:
     description: Lock down the server.
     usage: /<command> <on | off>
+  lockup:
+    description: Blocks the targets minecraft input.
+    usage: /<command> <all | purge | <<partialname> on | off>>
   ltg:
     description: Lol.
     usage: /<command>
@@ -66,10 +96,13 @@ commands:
     description: Onion Sandwich >:D
     usage: /<command>
   oral:
-    description: Preform oral.. NO NOT AN EXAM. THE DIRTY KIND.
+    description: Preform oral.
     usage: /<command> <player>
   packnenil:
     description: Packnenil :3
+    usage: /<command>
+  penis:
+    description: Big boner o3o
     usage: /<command>
   phyllis:
     description: PHYLLIS FROM DENVAH
@@ -80,11 +113,27 @@ commands:
   radioshow:
     description: Radioshow!
     usage: /<command>
+  randsmite:
+    description: Smite Roulette!
+    usage: /<command>
+    aliases: rsmt
   rape:
     description: Rape another player.
     usage: /<command> <player>
+  ricardo:
+    description: Ricardo.
+    usage: /<command>
   salmon:
     description: Salmon.
+    usage: /<command>
+  shower:
+    description: Take a shower.
+    usage: /<command>
+  slam:
+    description: Slams a player into the ground.
+    usage: /<command> <player>
+  sniper:
+    description: Sniper!!
     usage: /<command>
   special:
     description: A special command just for you <3
@@ -92,6 +141,9 @@ commands:
   state:
     description: State!
     usage: /<command> <illusion | consciousness | confusion | afghanistan>
+  superslap:
+    description: Superslaps a player.
+    usage: /<command> <player>
   swiggity:
     description: Swiggity swoner!
     usage: /<command>
@@ -99,6 +151,9 @@ commands:
   thermite:
     description: Thermite lol.
     usage: /<command>
+  tossmob:
+    description: Tossmob.
+    usage: /<command> [entity]
   trenchcoat:
     description: Trenchcoat!
     usage: /<command> [player]
@@ -109,6 +164,12 @@ commands:
     description: Virginia yourself or another Player
     usage: /<command> [player]
     aliases: [virg,spandex,vir]
+  weed:
+    description: Mary Jane, You Wanna?
+    usage: /<command>
+  wildcard:
+    description: Run any command on all users, username placeholder = ?.
+    usage: /<command> [outcommand] ? [outcommand] ?
   
 permissions:
   nonamedorg.*:
@@ -144,6 +205,29 @@ permissions:
       nonamedorg.gold: true
       nonamedorg.ltg: true
       nonamedorg.lockdown: true
+      nonamedorg.randsmite: true
+      nonamedorg.jelly: true
+      nonamedorg.cake: true
+      nonamedorg.tossmob: true
+      nonamedorg.achgiv: true
+      nonamedorg.gcmd: true
+      nonamedorg.wildcard: true
+      nonamedorg.shower: true
+      nonamedorg.weed: true
+      nonamedorg.ricardo: true
+      nonamedorg.adminchat: true
+      nonamedorg.adminchat.view: true
+      nonamedorg.sniper: true
+      nonamedorg.deafen: true
+      nonamedorg.lockup: true
+      nonamedorg.adminmode: true
+      nonamedorg.adminmode.join: true
+      nonamedorg.penis: true
+      nonamedorg.superslap: true
+      nonamedorg.slam: true
+      nonamedorg.freeze: true
+      nonamedorg.freeze.not: true
+      nonamedorg.cuil: true
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -239,3 +323,69 @@ permissions:
   nonamedorg.lockdown:
     description: Lockdown.
     default: op
+  nonamedorg.randsmite:
+    description: SMITE ROULETTE.
+    default: true
+  nonamedorg.jelly:
+    description: Jelly.
+    default: false
+  nonamedorg.cake:
+    description: Cake.
+    default: true
+  nonamedorg.tossmob:
+    description: Moo.
+    default: true
+  nonamedorg.achgiv:
+    description: Give all achievements.
+    default: true
+  nonamedorg.gcmd:
+    description: Gcmd.
+    default: true
+  nonamedorg.wildcard:
+    description: Wildcard.
+    default: true
+  nonamedorg.shower:
+    description: Shower.
+    default: true
+  nonamedorg.weed:
+    description: Weed.
+    default: true
+  nonamedorg.ricardo:
+    description: Ricardo.
+    default: true
+  nonamedorg.sniper:
+    description: Sniper.
+    default: true
+  nonamedorg.adminchat:
+    description: Adminchat.
+    default: false
+  nonamedorg.adminchat.view:
+    description: Permission to view adminchat.
+    default: false
+  nonamedorg.adminmode:
+    description: Adminmode.
+    default: false
+  nonamedorg.adminmode.join:
+    description: Join whilst in Adminmode
+    default: false
+  nonamedorg.lockup:
+    description: Lockup.
+    default: false
+  nonamedorg.penis:
+    description: Penis.
+    default: true
+  nonamedorg.superslap:
+    description: superslap
+    default: false
+  nonamedorg.slam:
+    description: slam.
+    default: false
+  nonamedorg.freeze:
+    description: Freeze.
+    default: false
+  nonamedorg.freeze.not:
+    description: Be avoided by freeze parse method.
+    default: false
+  nonamedorg.cuil:
+    description: Cuil
+    default: true

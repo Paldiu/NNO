@@ -1,17 +1,19 @@
 package me.Paldiu.NNO.Commands;
 
 import me.Paldiu.NNO.Main;
-import org.bukkit.Bukkit;
+import me.Paldiu.NNO.Util;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Swiggity implements CommandExecutor
+
+
+public class Shower implements CommandExecutor
 {
     public Main plugin;
-    public Swiggity(Main instance)
+    public Shower(Main instance)
     {
         plugin = instance;
     }
@@ -19,14 +21,14 @@ public class Swiggity implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if(commandLabel.equalsIgnoreCase("swiggity") || commandLabel.equalsIgnoreCase("swig"))
+        if (commandLabel.equalsIgnoreCase("shower"))
         {
             if (sender instanceof Player)
             {
                 Player p = (Player) sender;
-                if (sender.hasPermission("nonamedorg.swiggity"))
+                if (p.hasPermission("nonamedorg.shower"))
                 {
-                    Bukkit.getServer().broadcastMessage(ChatColor.GREEN + "Swiggity swoner " + p.getName() + " has a boner!");
+                    Util.bcastMsg(p.getName() + " is taking a golden shower!", ChatColor.GOLD);
                     return true;
                 }
                 else
@@ -35,7 +37,12 @@ public class Swiggity implements CommandExecutor
                     return true;
                 }
             }
+            else
+            {
+                sender.sendMessage(Main.NOT_FROM_CONSOLE);
+                return true;
+            }
         }
-        return false;
+        return true;
     }
 }

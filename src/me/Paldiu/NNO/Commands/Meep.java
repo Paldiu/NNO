@@ -19,9 +19,9 @@ public class Meep implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        Player p = (Player) sender;
         if (commandLabel.equalsIgnoreCase("meep"))
         {
+            Player p = (Player) sender;
             if (p.hasPermission("nonamedorg.meep"))
             {
                 Bukkit.getServer().broadcastMessage(ChatColor.GREEN + p.getName() + " has just MEEPED THE FUCK OUT OF EVERYTHING.");
@@ -29,7 +29,7 @@ public class Meep implements CommandExecutor
             }
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                Main.noPermission(p);
                 return true;
             }
         }

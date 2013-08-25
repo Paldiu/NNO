@@ -40,7 +40,8 @@ public class Emsd implements CommandExecutor
         }
         else
         {
-            sender.sendMessage(Main.MSG_NO_PERMS);
+            Main.noPermission(p);
+            return true;
         }
     }
         return true;

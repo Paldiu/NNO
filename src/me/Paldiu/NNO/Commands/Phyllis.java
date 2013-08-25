@@ -32,7 +32,7 @@ public class Phyllis implements CommandExecutor
             }
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                Main.noPermission(p);
                 return true;
             }
         }

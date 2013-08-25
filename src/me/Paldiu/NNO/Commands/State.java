@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package me.Paldiu.NNO.Commands;
 
 import org.bukkit.command.Command;
@@ -47,7 +43,7 @@ public class State implements CommandExecutor
                 }
                 else
                 {
-                    p.sendMessage(Main.MSG_NO_PERMS);
+                    Main.noPermission(p);
                     return true;
                 }
             }

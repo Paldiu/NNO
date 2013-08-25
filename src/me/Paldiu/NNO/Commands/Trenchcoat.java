@@ -43,7 +43,7 @@ public class Trenchcoat implements CommandExecutor
                     }
                     else
                     {
-                        p.sendMessage(Main.MSG_NO_PERMS);
+                        Main.noPermission(p);
                         return true;
                     }
                 }
@@ -66,7 +66,7 @@ public class Trenchcoat implements CommandExecutor
                     }
                     else
                     {
-                        p.sendMessage(Main.MSG_NO_PERMS);
+                        Main.noPermission(p);
                         return true;
                     }
                 }

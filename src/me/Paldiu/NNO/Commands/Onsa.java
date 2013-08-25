@@ -19,9 +19,9 @@ public class Onsa implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        Player p = (Player) sender;
         if (commandLabel.equalsIgnoreCase("onsa"))
         {
+            Player p = (Player) sender;
             if (p.hasPermission("nonamedorg.onsa"))
             {
                 Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + ": Preparing an Onion Sandwich...");
@@ -29,7 +29,7 @@ public class Onsa implements CommandExecutor
             }
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                Main.noPermission(p);
                 return true;
             }
         }

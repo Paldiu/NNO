@@ -14,6 +14,7 @@ public class Nno implements CommandExecutor {
 		plugin = instance;
 	}
 
+        @Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 			String[] args) {
 		if (commandLabel.equalsIgnoreCase("nno") || commandLabel.equalsIgnoreCase("orangepenis")){
@@ -21,7 +22,7 @@ public class Nno implements CommandExecutor {
 				sender.sendMessage(String.format("[%s] Version: %s by %s - %s", plugin.getDescription().getName(), plugin.getDescription().getVersion(), plugin.getDescription().getAuthors(), plugin.getDescription().getDescription()));
 				return true;
 			} else {
-				sender.sendMessage(Main.MSG_NO_PERMS);
+				Main.noPermission(null);
 				return true;
 			}
 		}

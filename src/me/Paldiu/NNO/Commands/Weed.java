@@ -1,17 +1,19 @@
 package me.Paldiu.NNO.Commands;
 
-import me.Paldiu.NNO.Main;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
+import me.Paldiu.NNO.Main;
+import me.Paldiu.NNO.Util;
+import org.bukkit.ChatColor;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-public class Nope implements CommandExecutor
+public class Weed implements CommandExecutor
 {
     public Main plugin;
-    public Nope(Main instance)
+    public Weed(Main instance)
     {
         plugin = instance;
     }
@@ -19,15 +21,18 @@ public class Nope implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (commandLabel.equalsIgnoreCase("nope"))
+        if (commandLabel.equalsIgnoreCase("weed"))
         {
             if (sender instanceof Player)
             {
                 Player p = (Player) sender;
-                if (p.hasPermission("nonamedorg.nope"))
+                if (p.hasPermission("nonamedorg.weed"))
                 {
-                    p.kickPlayer(ChatColor.RED + "NOPE");
-                    Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " has just NOPED the fuck out of the server.");
+                    Util.bcastMsg(ChatColor.DARK_GREEN + p.getName() + " is high as fuck!");
+                    p.sendMessage(ChatColor.RED + "YOU JUST SMOKED HALF A FUCKING POUND YOU CRAZY FUCKER");
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 12000, 200));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 12000, 200));
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 12000, 200));
                     return true;
                 }
                 else

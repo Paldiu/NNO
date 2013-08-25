@@ -15,6 +15,7 @@ public class Devconf implements CommandExecutor {
 		plugin = instance;
 	}
 
+        @Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel,
 			String[] args) {
 		if (commandLabel.equalsIgnoreCase("devconf") || commandLabel.equalsIgnoreCase("devme") || commandLabel.equalsIgnoreCase("confirm")){
@@ -27,7 +28,7 @@ public class Devconf implements CommandExecutor {
 					return true;
 				} else {
                                         Bukkit.getServer().broadcastMessage(ChatColor.RED + p.getName() + " has tried to play off as a developer!");
-					p.sendMessage(Main.MSG_NO_PERMS);
+					Main.noPermission(p);
 					return true;
 				}
 			} else {
@@ -37,10 +38,4 @@ public class Devconf implements CommandExecutor {
 		}
 		return false;
 	}
-
-
-	public String parseColors(String name){
-        String coloredName = ChatColor.translateAlternateColorCodes('&', name);
-        return coloredName;
-        }  
 }

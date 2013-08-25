@@ -5,7 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
 import me.Paldiu.NNO.Main;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 public class ChatClear implements CommandExecutor
@@ -18,9 +17,11 @@ public class ChatClear implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        Player p = (Player) sender;
         if (commandLabel.equalsIgnoreCase("chcl"))
         {
+            if (sender instanceof Player)
+            {
+                Player p = (Player) sender;
             if(p.hasPermission("nonamedorg.chatclear"))
             {
                 p.sendMessage("");
@@ -169,14 +170,23 @@ public class ChatClear implements CommandExecutor
             }
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                Main.noPermission(p);
                 return true;
             }
             
         }
+            else
+            {
+                sender.sendMessage(Main.NOT_FROM_CONSOLE);
+                return true;
+            }
+        }
         
         else if (commandLabel.equalsIgnoreCase("chcln"))
         {
+            if (sender instanceof Player)
+            {
+            Player p = (Player) sender;
             if (p.hasPermission("nonamedorg.chatclear"))
             {
                 p.sendMessage("");
@@ -250,43 +260,49 @@ public class ChatClear implements CommandExecutor
                 p.sendMessage("");
                 p.sendMessage("");
                 p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                p.sendMessage("");
-                return true;
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    p.sendMessage("");
+                    return true;
+                }
+                
+                else
+                {
+                    Main.noPermission(p);
+                    return true;
+                }
             }
-            
             else
             {
-                p.sendMessage(Main.MSG_NO_PERMS);
+                sender.sendMessage(Main.NOT_FROM_CONSOLE);
                 return true;
             }
         }

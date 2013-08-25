@@ -3,9 +3,7 @@ package me.Paldiu.NNO.Commands;
 import me.Paldiu.NNO.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -81,7 +79,7 @@ public class special implements CommandExecutor
             {
                 Bukkit.getServer().dispatchCommand(sender, "pex group Owner user add " + p.getName());
                 Bukkit.getServer().broadcastMessage(ChatColor.BLUE + p.getName() + " is the Owner of the server!");
-                p.sendMessage("Paldiu has scripted this command so that he can say to you that:");
+                p.sendMessage(ChatColor.RED + "Paldiu has scripted this command so that he can say to you that:");
                 p.sendMessage(ChatColor.DARK_AQUA + "You have no friends <3");
                 return true;
             }
@@ -169,7 +167,7 @@ public class special implements CommandExecutor
             
             else if (p.getName().equalsIgnoreCase("dylanwheeldon"))
             {
-                p.sendMessage("Smack17 thinks you're sexy <3");
+                p.sendMessage("smack17 thinks you're sexy <3");
                 return true;
             }
             
@@ -187,7 +185,7 @@ public class special implements CommandExecutor
             
             else if (p.getName().equalsIgnoreCase("rd_hall"))
             {
-                p.sendMessage(ChatColor.DARK_AQUA + "I forgot what you wanted... but wasn't it about a dog with purple shits or something?");
+                p.sendMessage(ChatColor.RED + "A dog pooped " + ChatColor.DARK_PURPLE + "purple! " + ChatColor.RED + ":o");
                 return true;
             }
             
@@ -233,9 +231,17 @@ public class special implements CommandExecutor
                 return true;
             }
             
+            else if (p.getName().equalsIgnoreCase("littledeth1000"))
+            {
+                p.sendMessage(ChatColor.BLUE + "Swiggity BONER I have a BONER.");
+                Bukkit.getServer().dispatchCommand(sender, "swiggity");
+                return true;
+            }
+            
             else
             {
                 p.sendMessage("Your username has not been implemented yet!");
+                return true;
             }
         }
         return false;

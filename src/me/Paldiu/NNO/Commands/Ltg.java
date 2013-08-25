@@ -2,6 +2,7 @@ package me.Paldiu.NNO.Commands;
 
 import me.Paldiu.NNO.Main;
 import me.Paldiu.NNO.Util;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,17 +21,17 @@ public class Ltg implements CommandExecutor
     {
         if (commandLabel.equalsIgnoreCase("ltg"))
         {
-            Player p = (Player) sender;
             if (sender instanceof Player)
             {
+                Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.ltg"))
                 {
-                    Util.bcastMsg(p.getName() + " has just lost the game!");
+                    Util.bcastMsg(ChatColor.GREEN + p.getName() + " has just lost the game!");
                     return true;
                 }
                 else
                 {
-                    p.sendMessage(Main.MSG_NO_PERMS);
+                    Main.noPermission(p);
                     return true;
                 }
             }
