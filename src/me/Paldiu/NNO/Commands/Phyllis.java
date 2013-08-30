@@ -26,7 +26,7 @@ public class Phyllis implements CommandExecutor
             {
                 Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "HI ITS PHYLLIS FROM DENVAH HERE!");
                 Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "I BOUGHT A SHAMWOW BECAUSE MY CAT MR FLUFFY " + ChatColor.RED + "BIT THE DUST " + ChatColor.LIGHT_PURPLE + "A FEW DAYS AGO, ");
-                Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "AND I WANTED TO DUST HIM OFF BEFORE I SENT HIM TO THE " + ChatColor.DARK_RED + "TAXIDERMIST" + ChatColor.LIGHT_PURPLE + "!");
+                Bukkit.getServer().broadcastMessage(ChatColor.LIGHT_PURPLE + "AND I WANTED TO DUST HIM OFF BEFORE I SENT HIM TO THE " + ChatColor.DARK_RED + "TAXIDURMIST" + ChatColor.LIGHT_PURPLE + "!");
                 Bukkit.getServer().broadcastMessage(ChatColor.BLUE + "NOW HE SITS PROUDLY ON MY MANTLE, " + ChatColor.WHITE + "CLEAN " + ChatColor.BLUE + "AS EVAH!!!");
                 return true;
             }

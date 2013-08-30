@@ -31,7 +31,7 @@ public class Tossmob implements CommandExecutor
                 Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.tossmob"))
                 {
-                    if (!Main.tossmobEnabled)
+                    if (!Main.plugin.getConfig().getBoolean("tossmob_enabled", false))
                     {
                         p.sendMessage(ChatColor.RED + "Tossmob is currently disabled.");
                         return true;

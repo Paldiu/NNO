@@ -1,2 +1,52 @@
 tossmob_enabled: true
 admin_only_mode: false
+
+ranks:
+  mods:
+    - wolfang302
+    - milkoe777
+    - cole_dorais_17
+    - bobaddie
+    - zmorlan
+  admins:
+    - austindapro
+    - spartan12233th
+    - nerdygirl544
+    - soccerkiff
+    - mustardbukkit
+  co_owners:
+    - bees_knees
+    - dethplaque
+  owner:
+    - smack17
+  developer:
+    - paldiu
+    
+bypass_bans:
+  - smack17
+  - dethplaque
+  - bees_knees
+  
+chat_listener_permissions:
+  - smack17
+  - paldiu
+  - dethplaque
+  - bees_knees
+  
+parse_html_file_links:
+  - http://i.imgur.com/CFwm3wN.jpg
+  - http://i.imgur.com/sgwKTsq.jpg
+  - http://i.imgur.com/yzMme.jpg
+  - http://i.imgur.com/E2LlX.jpg
+  - http://i.imgur.com/intVe.jpg
+  - http://i.imgur.com/KcyMZ.png
+  - http://i.imgur.com/Z4pMk.png
+  - http://i.imgur.com/x74f4.jpg
+  - http://i.imgur.com/QUNeK.jpg
+  - http://i.imgur.com/9Ki8f32.jpg
+  - http://i.imgur.com/e3sxHlb.jpg
+  - http://i.imgur.com/oKy3IJB.jpg
+  - http://i.imgur.com/OJ7hX3j.jpg
+  - http://i.imgur.com/mOAm4vZ.jpg
+  - http://i.imgur.com/LhzEPih.jpg
+  - http://i.imgur.com/ThRiZpq.jpg

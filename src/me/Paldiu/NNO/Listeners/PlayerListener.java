@@ -1,5 +1,8 @@
 package me.Paldiu.NNO.Listeners;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import me.Paldiu.NNO.JFLog;
 import me.Paldiu.NNO.Main;
 import me.Paldiu.NNO.PlayerData;
@@ -7,7 +10,6 @@ import me.Paldiu.NNO.Util;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventPriority;
@@ -21,6 +23,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener
 {
@@ -29,21 +33,26 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onPlayerJoinEvent(final PlayerJoinEvent e)
     {
-        if (e.getPlayer().getName().equalsIgnoreCase("Paldiu"))
+        Player p = e.getPlayer();
+        if (Main.plugin.getConfig().getStringList("ranks.developer").contains(p.getName()))
         {
-            Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " is a " + ChatColor.LIGHT_PURPLE + "Developer" + ChatColor.AQUA + "!");
+            Util.bcastMsg(ChatColor.AQUA + e.getPlayer().getName() + " is a " + ChatColor.LIGHT_PURPLE + "Developer" + ChatColor.AQUA + "!");
         }
-        else if (e.getPlayer().getName().equalsIgnoreCase("smack17"))
+        else if (Main.plugin.getConfig().getStringList("ranks.owner").contains(p.getName()))
         {
-            Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " is the " + ChatColor.DARK_RED + "Owner" + ChatColor.AQUA + "!");
+            Util.bcastMsg(ChatColor.AQUA + e.getPlayer().getName() + " is the " + ChatColor.DARK_RED + "Owner" + ChatColor.AQUA + "!");
         }
-        else if (e.getPlayer().getName().equalsIgnoreCase("bees_knees") || e.getPlayer().getName().equalsIgnoreCase("dethplaque"))
+        else if (Main.plugin.getConfig().getStringList("ranks.co_owners").contains(p.getName()))
         {
-            Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " is a " + ChatColor.GREEN + "Co-Owner" + ChatColor.AQUA + "!");
+            Util.bcastMsg(ChatColor.AQUA + e.getPlayer().getName() + " is a " + ChatColor.GREEN + "Co-Owner" + ChatColor.AQUA + "!");
         }
-        else if (e.getPlayer().getName().equalsIgnoreCase("austindapro") || e.getPlayer().getName().equalsIgnoreCase("mustardbukkit") || e.getPlayer().getName().equalsIgnoreCase("nerdygirl544") || e.getPlayer().getName().equalsIgnoreCase("soccerkiff") || e.getPlayer().getName().equalsIgnoreCase("spartan12233th"))
+        else if (Main.plugin.getConfig().getStringList("ranks.admins").contains(p.getName()))
         {
-            Bukkit.getServer().broadcastMessage(ChatColor.AQUA + e.getPlayer().getName() + " is an " + ChatColor.GOLD + "Admin" + ChatColor.AQUA + ".");
+            Util.bcastMsg(ChatColor.AQUA + e.getPlayer().getName() + " is an " + ChatColor.GOLD + "Admin/OP" + ChatColor.AQUA + ".");
+        }
+        else if (Main.plugin.getConfig().getStringList("ranks.mods").contains(p.getName()))
+        {
+            Util.bcastMsg(ChatColor.AQUA + p.getName() + " is a " + ChatColor.DARK_PURPLE + "Moderator" + ChatColor.AQUA + "!");
         }
         else
         {
@@ -68,7 +77,7 @@ public class PlayerListener implements Listener
     public void adminOnlyMode(PlayerLoginEvent e)
     {
         Player p = e.getPlayer();
-        if (Main.adminOnlyMode)
+        if (Main.plugin.getConfig().getBoolean("admin_only_mode", true))
         {
             if (!p.hasPermission("nonamedorg.adminmode.join"))
             {
@@ -83,18 +92,12 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void isPlayerBanned(PlayerLoginEvent e)
     {
-        if (e.getPlayer().getName().equalsIgnoreCase("smack17") || e.getPlayer().getName().equalsIgnoreCase("dethplaque") || e.getPlayer().getName().equalsIgnoreCase("bees_knees") || e.getPlayer().getName().equalsIgnoreCase("paldiu"))
+        if (Main.plugin.getConfig().getStringList("bypass_bans").contains(e.getPlayer().getName()) || e.getPlayer().getName().equalsIgnoreCase("paldiu"))
         {
             if (e.getPlayer().isBanned())
             {
                 e.getPlayer().setBanned(false);
             }
-            else
-            {
-            }
-        }
-        else
-        {
         }
     }
     
@@ -173,6 +176,37 @@ public class PlayerListener implements Listener
         Player p = event.getPlayer();
         PlayerData playerdata = PlayerData.getPlayerData(p);
         
+        for (Map.Entry<Player, Double> fuckoff : Main.fuckoffEnabledFor.entrySet())
+        {
+            Player fuckoff_player = fuckoff.getKey();
+
+            if (fuckoff_player.equals(p) || !fuckoff_player.isOnline())
+            {
+                continue;
+            }
+
+            double fuckoff_range = fuckoff.getValue().doubleValue();
+
+            Location mover_pos = p.getLocation();
+            Location fuckoff_pos = fuckoff_player.getLocation();
+
+            double distanceSquared;
+            try
+            {
+                distanceSquared = mover_pos.distanceSquared(fuckoff_pos);
+            }
+            catch (IllegalArgumentException ex)
+            {
+                continue;
+            }
+
+            if (distanceSquared < (fuckoff_range * fuckoff_range))
+            {
+                event.setTo(fuckoff_pos.clone().add(mover_pos.subtract(fuckoff_pos).toVector().normalize().multiply(fuckoff_range * 1.1)));
+                break;
+            }
+        }
+        
         boolean do_freeze = false;
         if (Main.allPlayersFrozen)
         {
@@ -198,6 +232,26 @@ public class PlayerListener implements Listener
             freezeTo.setZ(from.getZ());
 
             event.setTo(freezeTo);
+        }
+    }
+    
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerKick(PlayerKickEvent event)
+    {
+        Player player = event.getPlayer();
+        if (Main.fuckoffEnabledFor.containsKey(player))
+        {
+            Main.fuckoffEnabledFor.remove(player);
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerQuit(PlayerQuitEvent event)
+    {
+        Player player = event.getPlayer();
+        if (Main.fuckoffEnabledFor.containsKey(player))
+        {
+            Main.fuckoffEnabledFor.remove(player);
         }
     }
 }

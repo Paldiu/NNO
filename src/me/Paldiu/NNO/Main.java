@@ -2,6 +2,8 @@ package me.Paldiu.NNO;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 import me.Paldiu.NNO.Commands.*;
@@ -41,6 +43,7 @@ public class Main extends JavaPlugin {
         public static Server server = Bukkit.getServer();
         public static boolean allPlayersFrozen = false;
         public static BukkitTask freezePurgeTask = null;
+        public static Map<Player, Double> fuckoffEnabledFor = new HashMap<Player, Double>();
         public ChatClear chatclear = new ChatClear(this);
         public Virginia virginia = new Virginia(this);
 	public Ntoggle ntoggle = new Ntoggle(this);
@@ -53,7 +56,6 @@ public class Main extends JavaPlugin {
         public special special = new special(this);
         public Meep meep = new Meep(this);
         public Onsa onsa = new Onsa(this);
-        public Bypass bypass = new Bypass(this);
         public Phyllis phyllis = new Phyllis(this);
         public Bhrp bhrp = new Bhrp(this);
         public Deafen deafen = new Deafen(this);
@@ -87,6 +89,9 @@ public class Main extends JavaPlugin {
         public Slam slam = new Slam(this);
         public Freeze freeze = new Freeze(this);
         public Cuil cuil = new Cuil(this);
+        //public Crash crash = new Crash(this);
+        public Rawsay rawsay = new Rawsay(this);
+        public Fuckoff fuckoff = new Fuckoff(this);
 
 	public static final Logger log = Logger.getLogger("Minecraft");
         
@@ -95,8 +100,6 @@ public class Main extends JavaPlugin {
                 Main.plugin = this;
                 Main.plugin_file = getFile();
                 Main.pluginName = this.getDescription().getName();
-                
-                loadMainConfig();
                 
                 getCommand("rape").setExecutor(anal);
                 getCommand("oral").setExecutor(anal);
@@ -113,9 +116,6 @@ public class Main extends JavaPlugin {
                 getCommand("special").setExecutor(special);
                 getCommand("phyllis").setExecutor(phyllis);
                 getCommand("meep").setExecutor(meep);
-                getCommand("bptp").setExecutor(bypass);
-                getCommand("bpkick").setExecutor(bypass);
-                getCommand("bpban").setExecutor(bypass);
                 getCommand("onsa").setExecutor(onsa);
                 getCommand("bhrp").setExecutor(bhrp);
                 getCommand("deafen").setExecutor(deafen);
@@ -150,11 +150,15 @@ public class Main extends JavaPlugin {
                 getCommand("slam").setExecutor(slam);
                 getCommand("freeze").setExecutor(freeze);
                 getCommand("cuil").setExecutor(cuil);
+                //getCommand("crash").setExecutor(crash);
+                getCommand("rawsay").setExecutor(rawsay);
+                getCommand("fuckoff").setExecutor(fuckoff);
                 this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-                
-                
-                
+                //Configuration
+                this.getConfig().set("admin_mode_enabled", false);
+                this.getConfig().set("tossmob_enabled", true);
+                this.saveDefaultConfig();
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}
         
@@ -221,36 +225,4 @@ public class Main extends JavaPlugin {
             sender.sendMessage(ChatColor.RED + "Error: String<Build.length[impl] send.user> is not applicable!");
         }
         
-        //Configuration
-        public static boolean tossmobEnabled = true;
-        public static boolean adminOnlyMode = false;
-
-        public void loadMainConfig()
-        {
-            try
-            {
-                File configFile = new File(plugin.getDataFolder(), "config.yml");
-                if (!configFile.exists())
-                {
-                    Util.setConfig(getConfig());
-                    getConfig().options().copyDefaults(true);
-                    try
-                    {
-                        getConfig().save(configFile);
-                    }
-                    catch (IOException e)
-                    {
-                    }
-                }
-                Util.createDefaultConfiguration(CONFIG_FILE, plugin_file);
-                FileConfiguration config = YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), CONFIG_FILE));
-            
-                tossmobEnabled = getConfig().getBoolean("tossmob_enabled");
-                adminOnlyMode = getConfig().getBoolean("admin_only_mode");
-            }
-            catch (Exception ex)
-            {
-                JFLog.severe("Error loading main config: " + ex.getMessage());
-            }
-        }
 }

@@ -22,15 +22,6 @@ commands:
   bhrp:
     description: IS THIS THE REAL LIFE?
     usage: /<command>
-  bpkick:
-    description: <^\\$]+)\\.class>.append(file.getAll)[random.nextInt(%s.length)]
-    usage: /<command> <player>
-  bpban:
-    description: <^\\$]+)\\.class>.append(file.getAll)[random.nextInt(%s.length)]
-    usage: /<command> <player>
-  bptp:
-    description: <^\\$]+)\\.class>.append(file.getAll)[random.nextInt(%s.length)]
-    usage: /<command> <player>
   cake:
     description: Cake!
     usage: /<command>
@@ -40,6 +31,9 @@ commands:
   chcln:
     description: Clears your chat, without notification.
     usage: /<command>
+  #crash:
+   # description: Crash the server.
+   # usage: /<command> <on | off>
   cuil:
     description: The 7 Cuils.
     usage: /<command> <0-7 | info>
@@ -57,6 +51,9 @@ commands:
     description: Freezes players (Toggles on and off).
     usage: /<command> [target | purge]
     aliases: fr
+  fuckoff:
+    description: They'll never even see it coming.
+    usage: /<command> [on > range(5-100)]
   gcmd:
     description: Sudo command.
     usage: /<command> <player> <outcommand>
@@ -83,7 +80,7 @@ commands:
     usage: /<command>
   nno:
     description: States the plugins version and description
-    usage: /<command>
+    usage: /<command> [help [admin]]
     aliases: orangepenis
   nope:
     description: NOPE THE FUCK OUT OF THE SERVER.
@@ -120,6 +117,9 @@ commands:
   rape:
     description: Rape another player.
     usage: /<command> <player>
+  rawsay:
+    description: Broadcast a message without any extra formatting.
+    usage: /<command> <message>
   ricardo:
     description: Ricardo.
     usage: /<command>
@@ -228,6 +228,9 @@ permissions:
       nonamedorg.freeze: true
       nonamedorg.freeze.not: true
       nonamedorg.cuil: true
+      nonamedorg.anal.exempt: true
+      nonamedorg.rawsay: true
+      nonamedorg.fuckoff: true
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -389,3 +392,12 @@ permissions:
   nonamedorg.cuil:
     description: Cuil
     default: true
+  nonamedorg.anal.exempt:
+    description: Exempt from tp commands.
+    default: false
+  nonamedorg.rawsay:
+    description: Rawsay.
+    default: false
+  nonamedorg.fuckoff:
+    description: Fuck off.
+    default: false

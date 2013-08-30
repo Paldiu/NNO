@@ -34,13 +34,13 @@ public class AdminMode implements CommandExecutor
     
                     if (args[0].equalsIgnoreCase("off"))
                     {
-                        Main.adminOnlyMode = false;
+                        Main.plugin.getConfig().set("admin_mode_enabled", false);
                         Util.bcastMsg(ChatColor.GREEN + p.getName() + " - Opening the server to all players.");
                         return true;
                     }
                     else if (args[0].equalsIgnoreCase("on"))
                     {
-                        Main.adminOnlyMode = true;
+                        Main.plugin.getConfig().set("admin_mode_enabled", true);
                         Util.bcastMsg(ChatColor.RED + p.getName() + " - Closing the server to non-admins.");
                         for (Player player : Bukkit.getServer().getOnlinePlayers())
                         {
@@ -67,13 +67,13 @@ public class AdminMode implements CommandExecutor
 
                 if (args[0].equalsIgnoreCase("off"))
                 {
-                    Main.adminOnlyMode = false;
+                    Main.plugin.getConfig().set("admin_only_mode", false);
                     Util.bcastMsg(ChatColor.GREEN + sender.getName() + " - Opening the server to all players.");
                     return true;
                 }
                 else if (args[0].equalsIgnoreCase("on"))
                 {
-                    Main.adminOnlyMode = true;
+                    Main.plugin.getConfig().set("admin_only_mode", true);
                     Util.bcastMsg(ChatColor.RED + sender.getName() + " - Closing the server to non-admins.");
                     for (Player player : Bukkit.getServer().getOnlinePlayers())
                     {

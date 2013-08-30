@@ -44,9 +44,17 @@ public class Anal implements CommandExecutor
                         Player target = Bukkit.getServer().getPlayer(args[0]);
                         if (target != null)
                         {
-                            Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + " wants to fuck " + target.getName() + " anally!");
-                            p.teleport(target);
-                            return true;
+                            if (!target.hasPermission("nonamedorg.anal.exempt"))
+                            {
+                                Bukkit.getServer().broadcastMessage(ChatColor.RED + sender.getName() + " wants to fuck " + target.getName() + " anally!");
+                                p.teleport(target);
+                                return true;
+                            }
+                            else
+                            {
+                                p.sendMessage(ChatColor.RED + "Error: That player has teleportion disabled.");
+                                return true;
+                            }
                         } else {
                             p.sendMessage(Main.PLAYER_NOT_FOUND);
                             return true;
@@ -79,20 +87,28 @@ public class Anal implements CommandExecutor
                         final Player target = Bukkit.getServer().getPlayer(args[0]);
                         if (target != null)
                         {
-                            Bukkit.getServer().broadcastMessage(ChatColor.BLUE + sender.getName() + " is giving oral to " + target.getName() + "!");
-                            p.teleport(target);
-                            
-                            new BukkitRunnable()
+                            if (!target.hasPermission("nonamedorg.anal.exempt"))
                             {
-                                @Override
-                                public void run()
+                                Bukkit.getServer().broadcastMessage(ChatColor.BLUE + sender.getName() + " is giving oral to " + target.getName() + "!");
+                                p.teleport(target);
+                                
+                                new BukkitRunnable()
                                 {
-                                    p.teleport(target);
-                                    p.setVelocity(new Vector(2,2,0));
-                                    target.setVelocity(new Vector(-2,2,0));
-                                }
-                            }.runTaskLater(plugin, 20L);
-                            return true;
+                                    @Override
+                                    public void run()
+                                    {
+                                        p.teleport(target);
+                                        p.setVelocity(new Vector(2,2,0));
+                                        target.setVelocity(new Vector(-2,2,0));
+                                    }
+                                }.runTaskLater(plugin, 20L);
+                                return true;
+                            }
+                            else
+                            {
+                                p.sendMessage(ChatColor.RED + "Error: That player has teleportion disabled.");
+                                return true;
+                            }
                         } else {
                             p.sendMessage(Main.PLAYER_NOT_FOUND);
                             return true;
@@ -124,9 +140,17 @@ public class Anal implements CommandExecutor
                         Player target = Bukkit.getServer().getPlayer(args[0]);
                         if (target != null)
                         {
-                            Bukkit.getServer().broadcastMessage(ChatColor.GREEN + sender.getName() + ": Raping " + target.getName() + "...");
-                            p.teleport(target);
-                            return true;
+                            if (!target.hasPermission("nonamedorg.exempt"))
+                            {
+                                Bukkit.getServer().broadcastMessage(ChatColor.GREEN + sender.getName() + ": Raping " + target.getName() + "...");
+                                p.teleport(target);
+                                return true;
+                            }
+                            else
+                            {
+                                p.sendMessage(ChatColor.RED + "Error: That player has teleportation disabled.");
+                                return true;
+                            }
                         } else {
                             p.sendMessage(Main.PLAYER_NOT_FOUND);
                             return true;
