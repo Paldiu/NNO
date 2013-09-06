@@ -92,6 +92,7 @@ public class Main extends JavaPlugin {
         //public Crash crash = new Crash(this);
         public Rawsay rawsay = new Rawsay(this);
         public Fuckoff fuckoff = new Fuckoff(this);
+        public Pentagram pentagram = new Pentagram(this);
 
 	public static final Logger log = Logger.getLogger("Minecraft");
         
@@ -153,6 +154,7 @@ public class Main extends JavaPlugin {
                 //getCommand("crash").setExecutor(crash);
                 getCommand("rawsay").setExecutor(rawsay);
                 getCommand("fuckoff").setExecutor(fuckoff);
+                getCommand("pentagram").setExecutor(pentagram);
                 this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
                 //Configuration
