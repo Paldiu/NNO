@@ -31,13 +31,17 @@ public class Pentagram extends CommandExecutor
                 Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.pentagram")
                 {
-                    if (args.length != 1)
+                    if (args.length < 1)
                     {
                         return false;
                     }
-                    else
+                    else if (args.length > 2)
                     {
-                        if ((args[0].equals("on")) && (args[1].equals(target.getName())))
+                        return false;
+                    }
+                    else if (args.length == 1)
+                    {
+                        if ((args[0].equals("on")))
                         {
                             TrailMix = true;
                             final Location location = p.getLocation();
@@ -47,8 +51,8 @@ public class Pentagram extends CommandExecutor
                                 {
                                     while (TrailMix)
                                     {
-                                        location.setX(random.nextInt(location.getBlockX + x));
-                                        location.setZ(random.nextInt(location.getBlockY + y));
+                                        location.setX(random.nextInt(location.getBlockX() + x));
+                                        location.setZ(random.nextInt(location.getBlockY() + y));
                                         p.teleport(location);
                                     }
                                 }
@@ -58,6 +62,38 @@ public class Pentagram extends CommandExecutor
                         {
                             TrailMix = false;
                             p.kickPlayer(ChatColor.RED + "Pentagram has been disabled. Please relog for the changes to take effect.");
+                        }
+                    }
+                    else if (args.length == 2)
+                    {
+                        Player target = server.getPlayer(args[1])
+                        if ((args[0].equals("on")) && (args[1].equals(target.getName())))
+                        {
+                            if (target != null)
+                            {
+                                TrailMix = true;
+                                final Location location = target.getLocation();
+                                for (int x = -1; x <= 1; x++)
+                                {
+                                    for (int z = -1; z <= 1; z++)
+                                    {
+                                        while (TrailMix)
+                                        {
+                                            location.setX(random.nextInt(location.getBlockX() + x));
+                                            location.setZ(random.nextInt(location.getBlockZ() + z));
+                                            target.teleport(location);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                p.sendMessage(Main.PLAYER_NOT_FOUND);
+                            }
+                        }
+                        else
+                        {
+                            return false;
                         }
                     }
                 }
