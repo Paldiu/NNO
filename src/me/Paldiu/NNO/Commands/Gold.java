@@ -23,7 +23,7 @@ public class Gold implements CommandExecutor
     {
         if (commandLabel.equalsIgnoreCase("gold"))
         {
-            Player p = (Player) sender;
+            final Player p = (Player) sender;
             if (p.hasPermission("nonamedorg.gold"))
             {
                 if (args.length == 1)
@@ -39,6 +39,7 @@ public class Gold implements CommandExecutor
                             target.setHealth(0);
                             target.sendMessage(ChatColor.RED + "IT'S GOLD NOT BUDDER OR BUTTER YOU SKYFAG");
                             Util.bcastMsg(ChatColor.RED + target.getName() + " is a Sky fan -_-");
+                            Util.ChatBot(p.getName() + " has used /gold on " + target.getName() + ".");
                         }
                     }.runTaskLater(plugin, 5L * 2L);
                     return true;
@@ -52,6 +53,7 @@ public class Gold implements CommandExecutor
             else
             {
                 Main.noPermission(p);
+                Util.ChatBot(p.getName() + " just tried to use a disciplinary command!");
                 return true;
             }
         }

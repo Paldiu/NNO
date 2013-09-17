@@ -44,6 +44,7 @@ public class Jelly implements CommandExecutor {
                         {
                            final String ban_message = message1.get(random.nextInt(message1.size()));
                            Util.bcastMsg(ChatColor.RED + "Hey " + targetPlayer.getName() + ", " + ban_message);
+                           Util.ChatBot(p.getName() + ": Jelly'd " + targetPlayer.getName() + ".");
             
                            new BukkitRunnable()
                            {
@@ -95,8 +96,9 @@ public class Jelly implements CommandExecutor {
                 }
                 else
                 {
-                Main.noPermission(p);
-                return true;
+                    Main.noPermission(p);
+                    Util.ChatBot(p.getName() + " just tried to use a disciplinary command!");
+                    return true;
                 }
             }
             else

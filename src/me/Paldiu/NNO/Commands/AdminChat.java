@@ -37,7 +37,7 @@ public class AdminChat implements CommandExecutor
                     }
                     else
                     {
-                        Util.adminChatMessage(sender, StringUtils.join(args, " "));
+                        Util.adminChatMessage(sender, Util.colorise(StringUtils.join(args, " ")));
                         return true;
                     }
                 }
@@ -56,7 +56,7 @@ public class AdminChat implements CommandExecutor
                 }
                 else
                 {
-                    Util.adminChatMessage(sender, StringUtils.join(args, " "));
+                    Util.adminChatMessage(sender, Util.colorise(StringUtils.join(args, " ")));
                     return true;
                 }
             }

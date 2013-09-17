@@ -91,6 +91,7 @@ public class Freeze implements CommandExecutor
                             playerdata.setFrozen(!playerdata.isFrozen());
             
                             p.sendMessage(ChatColor.GRAY + player.getName() + " has been " + (playerdata.isFrozen() ? "frozen" : "unfrozen") + ".");
+                            Util.ChatBot(p.getName() + ": " + (playerdata.isFrozen() ? "froze" : "unfroze") + player.getName() + ".");
                             player.sendMessage(ChatColor.AQUA + "You have been " + (playerdata.isFrozen() ? "frozen" : "unfrozen") + ".");
                         }
                     }
@@ -100,6 +101,7 @@ public class Freeze implements CommandExecutor
                 else
                 {
                     Main.noPermission(p);
+                    Util.ChatBot(p.getName() + " just tried to use a disciplinary command!");
                     return true;
                 }
             }

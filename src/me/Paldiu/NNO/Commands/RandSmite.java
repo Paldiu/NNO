@@ -38,6 +38,7 @@ public class RandSmite implements CommandExecutor
                     
                     new BukkitRunnable()
                     {
+                        @Override
                         public void run()
                         {
                             final Location l = p.getLocation();
@@ -69,6 +70,7 @@ public class RandSmite implements CommandExecutor
         
                 new BukkitRunnable()
                 {
+                    @Override
                     public void run()
                     {
                         final Location l = p.getLocation();

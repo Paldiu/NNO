@@ -16,7 +16,6 @@ import org.bukkit.entity.*;
 public class Util
 {
     public static final Map<String, EntityType> mobtypes = new HashMap<String, EntityType>();
-    public static final List<String> DEVELOPERS = Arrays.asList("Paldiu");
     public static final List<String> STOP_COMMANDS = Arrays.asList("stop", "off", "end", "halt", "die");
     public static boolean method_crash = false;
     
@@ -82,7 +81,23 @@ public class Util
     {
         Util.bcastMsg(message, null);
     }
-
+    
+    public static void ChatBot(String message)
+    {
+        JFLog.info(message, true);
+        
+        for (Player player : Bukkit.getOnlinePlayers())
+        {
+            if (player.hasPermission("nonamedorg.adminchat.view"))
+            {
+                player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "BOT" + ChatColor.WHITE + ChatColor.DARK_GRAY + "] " + ChatColor.YELLOW + "ChatBot" + ChatColor.RESET + ": " + ChatColor.DARK_AQUA + message);
+            }
+            else
+            {
+            }
+        }
+    }
+    
     public static boolean isNewPlayer(Player player)
     {
         OfflinePlayer[] offlinePlayers = Bukkit.getServer().getOfflinePlayers();
@@ -138,17 +153,17 @@ public class Util
             }
         }
     }
+
     public static String getPrefix(CommandSender sender)
     {        
         String prefix;
         if (sender instanceof Player)
         {
-            Player p = (Player) sender;
-            if (p.getName().equalsIgnoreCase("smack17"))
+            if (Main.plugin.getConfig().getStringList("ranks.owner").contains(sender.getName().toLowerCase()))
             {
                 prefix = ChatColor.DARK_GRAY + "(" + ChatColor.BLUE + "Owner" + ChatColor.DARK_GRAY + ")";
             }
-            else if (p.getName().equalsIgnoreCase("bees_knees") || p.getName().equalsIgnoreCase("dethplaque"))
+            else if (Main.plugin.getConfig().getStringList("ranks.co_owners").contains(sender.getName().toLowerCase()))
             {
                 prefix = ChatColor.DARK_GRAY + "(" + ChatColor.GREEN + "Co-Owner" + ChatColor.DARK_GRAY + ")";
             }
@@ -156,11 +171,11 @@ public class Util
             {
                 prefix = ChatColor.DARK_GRAY + "(" + ChatColor.DARK_PURPLE + "Mod" + ChatColor.DARK_GRAY + ")";
             }
-            if (p.hasPermission("nonamedorg.adminchat.op"))
+            if (Main.plugin.getConfig().getStringList("ranks.admins").contains(sender.getName().toLowerCase()))
             {
                 prefix = ChatColor.DARK_GRAY + "(" + ChatColor.GOLD + "Op" + ChatColor.DARK_GRAY + ")";
             }
-            if (DEVELOPERS.contains(sender.getName()))
+            if (Main.plugin.getConfig().getStringList("ranks.developer").contains(sender.getName().toLowerCase()))
             {
                 prefix = ChatColor.DARK_GRAY + "(" + ChatColor.LIGHT_PURPLE + "Dev" + ChatColor.DARK_GRAY + ")";
             }

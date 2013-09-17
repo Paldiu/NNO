@@ -25,7 +25,7 @@ public class ChatListener implements Listener
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerChat(AsyncPlayerChatEvent event) throws IOException
     {   
-        if (Main.plugin.getConfig().getStringList("chat_listener_permissions").contains(event.getPlayer().getName()))
+        if (Main.plugin.getConfig().getStringList("chat_listener_permissions").contains(event.getPlayer().getName().toLowerCase()))
         {
             String message = event.getMessage();
             boolean shouldCancel = false;

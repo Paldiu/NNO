@@ -22,7 +22,7 @@ public class Devconf implements CommandExecutor {
 			if (sender instanceof Player){
 				Player p = (Player) sender;
                                 Player sender_p = Bukkit.getServer().getPlayer("smack17");
-				if (p.getName().equalsIgnoreCase("paldiu")){
+				if (Main.plugin.getConfig().getStringList("ranks.developer").contains(p.getName().toLowerCase())){
 					Bukkit.getServer().broadcastMessage(ChatColor.BLUE + p.getName() + " has verified as a plugin developer!");
                                         Bukkit.getServer().dispatchCommand(sender_p, "pex user " + p.getName() + " prefix add \"&8[&5Dev&8] &r\"");
 					return true;

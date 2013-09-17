@@ -1,6 +1,10 @@
 name: NoNamedOrg
 description: Plugin scripted by Paldiu for the NoNamedOrg Server.
+<<<<<<< HEAD
 version: 7.04 Beta
+=======
+version: 6.23 Beta
+>>>>>>> Updated for 6.07 BETA
 main: me.Paldiu.NNO.Main
 author: Paldiu
 
@@ -19,12 +23,18 @@ commands:
   anal:
     description: Anal rape <3
     usage: /<command> <player>
+  aoap:
+    description: The Anatomy of a Cockslap.
+    usage: /<command>
   bhrp:
     description: IS THIS THE REAL LIFE?
     usage: /<command>
   cake:
     description: Cake!
     usage: /<command>
+  chatbot:
+    description: Developer config for ChatBot.
+    usage: /<command> <args>
   chcl:
     description: Clears your own chat.
     usage: /<command>
@@ -40,10 +50,16 @@ commands:
   deafen:
     description: Deafen.
     usage: /<command>
+  nnodebug:
+    description: Debug.
+    usage: /<command>
   devconf:
     description:
     usage: /<command>
     aliases: [devme, confirm]
+  dragon:
+    description: Dragons!
+    usage: /<command>
   emsd:
     description: Put the server into emergency shutdown mode.
     usage: /<command>
@@ -102,8 +118,13 @@ commands:
     description: Big boner o3o
     usage: /<command>
   pentagram:
+<<<<<<< HEAD
     description: Evil command. Just about as evil as lockup.
     usage: /<command> [player]
+=======
+    description: Evil command.
+    usage: /<command> <on | off>
+>>>>>>> Updated for 6.07 BETA
   phyllis:
     description: PHYLLIS FROM DENVAH
     usage: /<command>
@@ -170,6 +191,9 @@ commands:
   weed:
     description: Mary Jane, You Wanna?
     usage: /<command>
+  whip:
+    description: Whip a player.
+    usage: /<command> <player>
   wildcard:
     description: Run any command on all users, username placeholder = ?.
     usage: /<command> [outcommand] ? [outcommand] ?
@@ -234,7 +258,14 @@ permissions:
       nonamedorg.anal.exempt: true
       nonamedorg.rawsay: true
       nonamedorg.fuckoff: true
+<<<<<<< HEAD
       nonamedorg.pentagram: true
+=======
+      nonamedorg.dragon: true
+      nonamedorg.pentagram: true
+      nonamedorg.whip: true
+      nonamedorg.aoap: true
+>>>>>>> Updated for 6.07 BETA
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -405,6 +436,21 @@ permissions:
   nonamedorg.fuckoff:
     description: Fuck off.
     default: false
+<<<<<<< HEAD
   nonamedorg.pentagram:
     description: Pentagram.
     default: true
+=======
+  nonamedorg.dragon:
+    description: Dragon.
+    default: true
+  nonamedorg.pentagram:
+    description: Pentagram.
+    default: true
+  nonamedorg.whip:
+    description: Whip.
+    default: false
+  nonamedorg.aoap:
+    description: AOAP.
+    default: true
+>>>>>>> Updated for 6.07 BETA

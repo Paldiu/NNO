@@ -1,7 +1,5 @@
 package me.Paldiu.NNO.Listeners;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import me.Paldiu.NNO.JFLog;
 import me.Paldiu.NNO.Main;
@@ -16,7 +14,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.Event;
 import static org.bukkit.event.block.Action.LEFT_CLICK_AIR;
 import static org.bukkit.event.block.Action.LEFT_CLICK_BLOCK;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -25,6 +25,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
 public class PlayerListener implements Listener
 {
@@ -73,15 +75,32 @@ public class PlayerListener implements Listener
         }
     }
     
+    @EventHandler
+    public void newPlayerGiveBook(PlayerJoinEvent e)
+    {
+        Player player = e.getPlayer();
+        ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
+        BookMeta bm = (BookMeta) book.getItemMeta();
+        bm.setAuthor(ChatColor.DARK_GRAY + "No" + ChatColor.AQUA + "Named" + ChatColor.DARK_GRAY + "Org");
+        bm.setTitle(Main.plugin.getConfig().getString("book.title"));
+        bm.setPage(1, Main.plugin.getConfig().getString("book.page1"));
+        bm.setPage(2, Main.plugin.getConfig().getString("book.page2"));
+        bm.setPage(3, Main.plugin.getConfig().getString("book.page3"));
+        if (Util.isNewPlayer(player))
+        {
+            player.getInventory().setItem(player.getInventory().firstEmpty(), book);
+        }
+    }
+    
     @EventHandler(priority = EventPriority.HIGHEST)
     public void adminOnlyMode(PlayerLoginEvent e)
     {
         Player p = e.getPlayer();
         if (Main.plugin.getConfig().getBoolean("admin_only_mode", true))
         {
-            if (!p.hasPermission("nonamedorg.adminmode.join"))
+            if (!Main.plugin.getConfig().getStringList("ranks.*").contains(p.getName().toLowerCase()))
             {
-                p.kickPlayer("AdminMode has been enabled. You cannot join until it is turned off.");
+                p.kickPlayer("The server is currently in adminmode");
             }
             else
             {
@@ -92,7 +111,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void isPlayerBanned(PlayerLoginEvent e)
     {
-        if (Main.plugin.getConfig().getStringList("bypass_bans").contains(e.getPlayer().getName()) || e.getPlayer().getName().equalsIgnoreCase("paldiu"))
+        if (Main.plugin.getConfig().getStringList("bypass_bans").contains(e.getPlayer().getName().toLowerCase()) || e.getPlayer().getName().equalsIgnoreCase("paldiu"))
         {
             if (e.getPlayer().isBanned())
             {

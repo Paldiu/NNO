@@ -46,12 +46,14 @@ public class Slam implements CommandExecutor
                         playerLocation.setY(target.getLocation().getY() - 1);
                         target.setHealth(0);
                         target.setVelocity(new Vector(0, -10, 0));
+                        Util.ChatBot(p.getName() + ": Slammed " + target.getName() + " into the ground.");
                         return true;
                     }
                 }
                 else
                 {
                     Main.noPermission(p);
+                    Util.ChatBot(p.getName() + " has just used a disciplinary command!");
                     return true;
                 }
             }
@@ -59,6 +61,7 @@ public class Slam implements CommandExecutor
             {
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 Util.bcastMsg(ChatColor.RED + sender.getName() + " has slammed " + target.getName() + " into the ground.");
+                Util.ChatBot("Console: Slammed " + target.getName() + " into the ground.");
                 target.setGameMode(GameMode.SURVIVAL);
                 target.getInventory().clear();
                 Location playerLocation = target.getLocation();

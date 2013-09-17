@@ -41,6 +41,7 @@ public class SuperSlap implements CommandExecutor
                         Util.bcastMsg(ChatColor.RED + target.getName() + " has been superslapped!");
                         Location newLocation = target.getLocation();
                         newLocation.setY(132);
+                        Util.ChatBot(p.getName() + ": Superslapped " + target.getName() + ".");
                         target.teleport(newLocation);
                         target.setGameMode(GameMode.SURVIVAL);
                         target.getInventory().clear();
@@ -64,6 +65,7 @@ public class SuperSlap implements CommandExecutor
                 else
                 {
                     Main.noPermission(p);
+                    Util.ChatBot(p.getName() + " has just used a disciplinary command!");
                     return true;
                 }
             }
@@ -72,6 +74,7 @@ public class SuperSlap implements CommandExecutor
                 Player target = Bukkit.getServer().getPlayer(args[0]);
                 Util.bcastMsg(ChatColor.RED + target.getName() + " has been superslapped!");
                 Location newLocation = target.getLocation();
+                Util.ChatBot("Console: Superslapped " + target.getName() + ".");
                 newLocation.setY(132);
                 target.teleport(newLocation);
                 target.setGameMode(GameMode.SURVIVAL);

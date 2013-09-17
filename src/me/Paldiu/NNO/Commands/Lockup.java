@@ -41,6 +41,7 @@ public class Lockup implements CommandExecutor
                                 startLockup(player);
                             }
                             p.sendMessage("Locked up all players.");
+                            Util.ChatBot(p.getName() + ": Locked up all players.");
                         }
                         else if (args[0].equalsIgnoreCase("purge"))
                         {
@@ -51,6 +52,7 @@ public class Lockup implements CommandExecutor
                             }
             
                             p.sendMessage("Unlocked all players.");
+                            Util.ChatBot(p.getName() + ": Unlocked all players.");
                         }
                         else
                         {
@@ -66,6 +68,7 @@ public class Lockup implements CommandExecutor
                             Util.bcastMsg(ChatColor.RED + sender.getName() + " - Locking up " + player.getName());
                             startLockup(player);
                             p.sendMessage("Locked up " + player.getName() + ".");
+                            Util.ChatBot(p.getName() + ": Locked up " + player.getName() + ".");
                         }
                         else if (Util.isStopCommand(args[1]))
                         {
@@ -73,6 +76,7 @@ public class Lockup implements CommandExecutor
             
                             Util.bcastMsg(ChatColor.RED + sender.getName() + " - Unlocking " + player.getName());
                             cancelLockup(player);
+                            Util.ChatBot(p.getName() + ": Unlocked " + player.getName() + ".");
                             p.sendMessage("Unlocked " + player.getName() + ".");
                         }
                         else
@@ -90,6 +94,7 @@ public class Lockup implements CommandExecutor
                 else
                 {
                     Main.noPermission(p);
+                    Util.ChatBot(p.getName() + " just tried to use a disciplinary command!");
                     return true;
                 }
             }

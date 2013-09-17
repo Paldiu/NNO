@@ -1,13 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package me.Paldiu.NNO.Commands;
 
 import java.lang.reflect.Field;
 import me.Paldiu.NNO.Main;
-import me.Paldiu.NNO.Util;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
@@ -26,12 +20,12 @@ public class Debug implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (commandLabel.equalsIgnoreCase("debug"))
+        if (commandLabel.equalsIgnoreCase("nnodebug"))
         {
             if (sender instanceof Player)
             {
                 Player p = (Player) sender;
-                if (Main.plugin.getConfig().getStringList("developers").contains(p.getName()))
+                if (Main.plugin.getConfig().getStringList("ranks.developer").contains(p.getName().toLowerCase()))
                 {
                     if (args.length < 3)
                     {
@@ -58,6 +52,11 @@ public class Debug implements CommandExecutor
                         sender.sendMessage(ex.getMessage());
                     }
 
+                    return true;
+                }
+                else
+                {
+                    Main.noPermission(p);
                     return true;
                 }
             }

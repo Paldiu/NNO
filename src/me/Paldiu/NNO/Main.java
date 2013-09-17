@@ -1,7 +1,6 @@
 package me.Paldiu.NNO;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -15,8 +14,6 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -92,7 +89,16 @@ public class Main extends JavaPlugin {
         //public Crash crash = new Crash(this);
         public Rawsay rawsay = new Rawsay(this);
         public Fuckoff fuckoff = new Fuckoff(this);
+<<<<<<< HEAD
         public Pentagram pentagram = new Pentagram(this);
+=======
+        public Debug debug = new Debug(this);
+        public Dragon dragon = new Dragon(this);
+        public Pentagram pentagram = new Pentagram(this);
+        public Aoap aoap = new Aoap(this);
+        public ChatBot chatbot = new ChatBot(this);
+        public Whip whip = new Whip(this);
+>>>>>>> Updated for 6.07 BETA
 
 	public static final Logger log = Logger.getLogger("Minecraft");
         
@@ -154,13 +160,23 @@ public class Main extends JavaPlugin {
                 //getCommand("crash").setExecutor(crash);
                 getCommand("rawsay").setExecutor(rawsay);
                 getCommand("fuckoff").setExecutor(fuckoff);
+<<<<<<< HEAD
                 getCommand("pentagram").setExecutor(pentagram);
+=======
+                getCommand("nnodebug").setExecutor(debug);
+                getCommand("dragon").setExecutor(dragon);
+                getCommand("pentagram").setExecutor(pentagram);
+                getCommand("whip").setExecutor(whip);
+                getCommand("chatbot").setExecutor(chatbot);
+                getCommand("aoap").setExecutor(aoap);
+>>>>>>> Updated for 6.07 BETA
                 this.getServer().getPluginManager().registerEvents(new ChatListener(), this);
                 this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
                 //Configuration
                 this.getConfig().set("admin_mode_enabled", false);
                 this.getConfig().set("tossmob_enabled", true);
                 this.saveDefaultConfig();
+                //
 		log.info(String.format("[%s] Version: %s by %s has been Enabled!", getDescription().getName(), getDescription().getVersion(), getDescription().getAuthors()));
 	}
         
