@@ -1,10 +1,6 @@
 name: NoNamedOrg
 description: Plugin scripted by Paldiu for the NoNamedOrg Server.
-<<<<<<< HEAD
-version: 7.04 Beta
-=======
-version: 6.23 Beta
->>>>>>> Updated for 6.07 BETA
+version: 6.04 Beta
 main: me.Paldiu.NNO.Main
 author: Paldiu
 
@@ -118,13 +114,8 @@ commands:
     description: Big boner o3o
     usage: /<command>
   pentagram:
-<<<<<<< HEAD
-    description: Evil command. Just about as evil as lockup.
-    usage: /<command> [player]
-=======
     description: Evil command.
     usage: /<command> <on | off>
->>>>>>> Updated for 6.07 BETA
   phyllis:
     description: PHYLLIS FROM DENVAH
     usage: /<command>
@@ -258,14 +249,11 @@ permissions:
       nonamedorg.anal.exempt: true
       nonamedorg.rawsay: true
       nonamedorg.fuckoff: true
-<<<<<<< HEAD
       nonamedorg.pentagram: true
-=======
       nonamedorg.dragon: true
       nonamedorg.pentagram: true
       nonamedorg.whip: true
       nonamedorg.aoap: true
->>>>>>> Updated for 6.07 BETA
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -436,11 +424,9 @@ permissions:
   nonamedorg.fuckoff:
     description: Fuck off.
     default: false
-<<<<<<< HEAD
   nonamedorg.pentagram:
     description: Pentagram.
     default: true
-=======
   nonamedorg.dragon:
     description: Dragon.
     default: true
@@ -453,4 +439,3 @@ permissions:
   nonamedorg.aoap:
     description: AOAP.
     default: true
->>>>>>> Updated for 6.07 BETA
