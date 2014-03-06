@@ -33,12 +33,23 @@ public class Aoap implements CommandExecutor
                 Player p = (Player) sender;
                 if (p.hasPermission("nonamedorg.aoap"))
                 {
-                    ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
-                    BookMeta bm = (BookMeta) book.getItemMeta();
-                    bm.setAuthor(ChatColor.DARK_GRAY + "No" + ChatColor.AQUA + "Named" + ChatColor.DARK_GRAY + "Org");
-                    bm.setTitle("The Anatomy Of A Cockslap");
-                    bm.setPage(1, "#1: Slapping ones cock with your hand, #2: Slapping ones face with your cock, or #3: Slapping ones cock with your own.");
-                    p.getInventory().setItem(p.getInventory().firstEmpty(), book);
+                    ItemStack bookStack = new ItemStack(Material.WRITTEN_BOOK);
+
+                    BookMeta book = (BookMeta) bookStack.getItemMeta().clone();
+                    book.setAuthor(ChatColor.DARK_GRAY + "No" + ChatColor.AQUA + "Named" + ChatColor.DARK_GRAY + "Org");
+                    book.setTitle("The Anatomy Of A Cockslap");
+                    book.addPage("#1: Slapping ones cock with your hand, #2: Slapping ones face with your cock, or #3: Slapping ones cock with your own.");
+                    bookStack.setItemMeta(book);
+
+                    for (Player player : TotalFreedomMod.server.getOnlinePlayers())
+                    {
+                        if (player.getInventory().contains(Material.WRITTEN_BOOK))
+                        {
+                            continue;
+                        }
+
+                        player.getInventory().addItem(bookStack);
+                    }
                 }
                 else
                 {
