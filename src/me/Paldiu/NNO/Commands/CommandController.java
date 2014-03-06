@@ -1,6 +1,6 @@
 package me.Paldiu.NNO.Commands;
 
-import com.caved_in.commons.Messages;
+import me.Paldiu.NNO.Main;
 import com.google.common.collect.Lists;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -257,7 +257,7 @@ public class CommandController implements CommandExecutor {
          * Otherwise we have to fake not recognising the command
          */
 		else {
-			sender.sendMessage("Unknown command. Type \"help\" for help.");
+			sender.sendMessage("Unknown command. Type \"/help\" for help.");
 		}
 
 		return true;
