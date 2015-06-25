@@ -1,6 +1,6 @@
 name: NoNamedOrg
 description: Plugin scripted by Paldiu for the NoNamedOrg Server.
-version: 6.07 Beta
+version: 7.0 Beta
 main: me.Paldiu.NNO.Main
 author: Paldiu
 
@@ -16,12 +16,6 @@ commands:
   adminmode:
     description: Turn on admin only mode.
     usage: /<command> <on | off>
-  anal:
-    description: Anal rape <3
-    usage: /<command> <player>
-  aoap:
-    description: The Anatomy of a Cockslap.
-    usage: /<command>
   bhrp:
     description: IS THIS THE REAL LIFE?
     usage: /<command>
@@ -37,9 +31,10 @@ commands:
   chcln:
     description: Clears your chat, without notification.
     usage: /<command>
+  @Deprecated
   #crash:
-   # description: Crash the server.
-   # usage: /<command> <on | off>
+   #description: Crash the server.
+   #usage: /<command> <on | off>
   cuil:
     description: The 7 Cuils.
     usage: /<command> <0-7 | info>
@@ -47,10 +42,10 @@ commands:
     description: Deafen.
     usage: /<command>
   nnodebug:
-    description: Debug.
+    description: Plugin debugger.
     usage: /<command>
   devconf:
-    description:
+    description: Developer Plugin Configuration
     usage: /<command>
     aliases: [devme, confirm]
   dragon:
@@ -63,18 +58,12 @@ commands:
     description: Freezes players (Toggles on and off).
     usage: /<command> [target | purge]
     aliases: fr
-  fuckoff:
-    description: They'll never even see it coming.
-    usage: /<command> [on > range(5-100)]
   gcmd:
     description: Sudo command.
     usage: /<command> <player> <outcommand>
   gold:
     description: For those pesky sky fags.
     usage: /<command> <player>
-  grogger:
-    description: Horny grogger!
-    usage: /<command>
   jelly:
     description: A pseudo-ban command. Funny end result.
     usage: /<command> <player>
@@ -101,18 +90,12 @@ commands:
     description: Toggle the plugin off.
     usage: /<command>
     aliases: ntg
-  onsa:
-    description: Onion Sandwich >:D
-    usage: /<command>
-  oral:
-    description: Preform oral.
-    usage: /<command> <player>
   packnenil:
     description: Packnenil :3
     usage: /<command>
-  penis:
-    description: Big boner o3o
-    usage: /<command>
+  pspace:
+    description: Retain your personal space up to 100 blocks.
+    usage: /<command> [on > range(5-100)]
   pentagram:
     description: Evil command.
     usage: /<command> <on | off>
@@ -129,9 +112,6 @@ commands:
     description: Smite Roulette!
     usage: /<command>
     aliases: rsmt
-  rape:
-    description: Rape another player.
-    usage: /<command> <player>
   rawsay:
     description: Broadcast a message without any extra formatting.
     usage: /<command> <message>
@@ -201,12 +181,10 @@ permissions:
       nonamedorg.nno: true
       nonamedorg.emsd: true
       nonamedorg.swiggity: true
-      nonamedorg.anal: true
       nonamedorg.pong: true
       nonamedorg.special: true
       nonamedorg.meep: true
       nonamedorg.phyllis: true
-      nonamedorg.onsa: true
       nonamedorg.bypass: true
       nonamedorg.bhrp: true
       nonamedorg.chatclear: true
@@ -216,7 +194,6 @@ permissions:
       nonamedorg.packnenil: true
       nonamedorg.nope: true
       nonamedorg.thermite: true
-      nonamedorg.grogger: true
       nonamedorg.state: true
       nonamedorg.radioshow: true
       nonamedorg.salmon: true
@@ -240,20 +217,17 @@ permissions:
       nonamedorg.lockup: true
       nonamedorg.adminmode: true
       nonamedorg.adminmode.join: true
-      nonamedorg.penis: true
       nonamedorg.superslap: true
       nonamedorg.slam: true
       nonamedorg.freeze: true
       nonamedorg.freeze.not: true
       nonamedorg.cuil: true
-      nonamedorg.anal.exempt: true
       nonamedorg.rawsay: true
-      nonamedorg.fuckoff: true
+      nonamedorg.pspace: true
       nonamedorg.pentagram: true
       nonamedorg.dragon: true
       nonamedorg.pentagram: true
       nonamedorg.whip: true
-      nonamedorg.aoap: true
   nonamedorg.chatclear:
     description: Permission to clear your own chat.
     default: true
@@ -284,9 +258,6 @@ permissions:
   nonamedorg.swiggity:
     description: Permission to use /swiggity
     default: true
-  nonamedorg.anal:
-    description: Permission for anal?
-    default: true
   nonamedorg.pong:
     description: Permission for pong
     default: true
@@ -299,9 +270,6 @@ permissions:
     default: true
   nonamedorg.meep:
     description: Meep the fuck.
-    default: true
-  nonamedorg.onsa:
-    description: Be prepared for the ultimate onion sandwich >:D
     default: true
   nonamedorg.bhrp:
     description: IS THIS THE REAL LIFE!?
@@ -333,9 +301,6 @@ permissions:
     default: true
   nonamedorg.radioshow: 
     description: Radioshow!
-    default: true
-  nonamedorg.grogger:
-    description: You horney grogger, you!
     default: true
   nonamedorg.salmon:
     description: Salmon.
@@ -397,9 +362,6 @@ permissions:
   nonamedorg.lockup:
     description: Lockup.
     default: false
-  nonamedorg.penis:
-    description: Penis.
-    default: true
   nonamedorg.superslap:
     description: superslap
     default: false
@@ -421,8 +383,8 @@ permissions:
   nonamedorg.rawsay:
     description: Rawsay.
     default: false
-  nonamedorg.fuckoff:
-    description: Fuck off.
+  nonamedorg.pspace:
+    description: pspace
     default: false
   nonamedorg.pentagram:
     description: Pentagram.
@@ -436,6 +398,3 @@ permissions:
   nonamedorg.whip:
     description: Whip.
     default: false
-  nonamedorg.aoap:
-    description: AOAP.
-    default: true
