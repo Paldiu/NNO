@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 public class Gcmd implements CommandExecutor
 {
+    //Thanks to StephenLawson and Prozza for this!
     public Main plugin;
     public Gcmd(Main instance)
     {
