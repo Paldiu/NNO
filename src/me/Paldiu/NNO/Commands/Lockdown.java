@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 public class Lockdown implements CommandExecutor
 {
+    //Thanks to StephenLawson and Prozza for this!
     public Main plugin;
     public Lockdown(Main instance)
     {
