@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 public class Wildcard implements CommandExecutor
 {
+    //Thanks to StephenLawson and Prozza for this!
     public Main plugin;
     public Wildcard(Main instance)
     {
@@ -31,13 +32,13 @@ public class Wildcard implements CommandExecutor
                     {
                         case "wildcard":
                         {
-                            p.sendMessage(ChatColor.RED + "What the hell are you trying to do, you stupid idiot...");
+                            p.sendMessage(ChatColor.RED + "Are you fucking retarded?");
                             return true;
                         }
                             
                         case "ban":
                         {
-                            p.sendMessage(ChatColor.RED + "Nice try");
+                            p.sendMessage(ChatColor.RED + "Nice try.");
                             return true;
                         }
                             
