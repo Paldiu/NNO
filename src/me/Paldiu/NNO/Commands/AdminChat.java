@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 public class AdminChat implements CommandExecutor
 {
+    //Thanks to StephenLawson and Prozza for this! 
     public Main plugin;
     public AdminChat(Main instance)
     {
