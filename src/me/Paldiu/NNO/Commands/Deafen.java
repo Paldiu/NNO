@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Deafen implements CommandExecutor
 {
+    //Thanks to StephenLawson and Prozza for this!
     public Main plugin;
     public Deafen(Main instance)
     {
