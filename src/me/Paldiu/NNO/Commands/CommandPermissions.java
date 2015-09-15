@@ -1,3 +1,4 @@
+
 package me.Paldiu.NNO.Commands;
 
 import org.bukkit.Bukkit;
@@ -12,6 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CommandPermissions {
 	private String permPrefix = "nno.";
 	private String permission;
+	private String defaultLevel = false;
 	private final JavaPlugin plugin;
 	private final String fileName;
 	private File permissionsFile;
@@ -105,9 +107,28 @@ public class CommandPermissions {
                     Matcher matcher = cls.matcher(entryName);
                     if (matcher.find())
                     {
-                    	String permission = permPrefix + matcher.toString();
-                    	getPermissions().addEntry();
-                    	
+                        if (matcher.find())
+                        {
+                            try
+                            {
+                                Class<?> commandClass = Class.forName("me.Paldiu.NNO.Commands." + matcher.group(1));
+                                if (commandClass.isAnnotationPresent(CommandParameters.class))
+                                {
+                                    String permission = permPrefix + commandClass.toString();
+                    	            getPermissions().addEntry("nno.*: ").append("default: false");
+                            	    getPermissions().addEntry(permission + ": ").append("default: " + defaultLevel);
+                                }
+                                else
+                                {
+                                    throw new Exception("Unknown exception occurred.");
+                                    continue;
+                                }
+                            } 
+                            catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
+                            {
+                                Bukkit.broadcastMessage("" + ex);
+                            }
+                        }
                     }
                 }
             }
