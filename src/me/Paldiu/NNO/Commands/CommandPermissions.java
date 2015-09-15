@@ -79,8 +79,8 @@ public class CommandPermissions {
 
 	public static void hasPermission(CommandSender sender, String permission) {
 		this.permission = permPrefix + permission;
-		if (!sender.hasPermission(permission) && (sender instanceof Player)) {
-			sender.sendMessage(ChatColor.RED + "You do not have permission!");
+		if (!sender.hasPermission(this.permission) && (sender instanceof Player)) {
+			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 			return true;
 		}
 		else if (!(sender instanceof Player)){
@@ -89,5 +89,27 @@ public class CommandPermissions {
 		else {
 			continue;
 		}
+	}
+	
+	private void writePermissions()
+	{
+		Pattern cls = Pattern.compile("me/Paldiu/NNO/Commands/(Command_[^\\$]+)\\.class");
+		CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
+            if (codeSource != null)
+            {
+                ZipInputStream zip = new ZipInputStream(codeSource.getLocation().openStream());
+                ZipEntry zipEntry;
+                while ((zipEntry = zip.getNextEntry()) != null)
+                {
+                    String entryName = zipEntry.getName();
+                    Matcher matcher = cls.matcher(entryName);
+                    if (matcher.find())
+                    {
+                    	String permission = permPrefix + matcher.toString();
+                    	getPermissions().addEntry();
+                    	
+                    }
+                }
+            }
 	}
 }
