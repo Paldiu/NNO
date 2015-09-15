@@ -41,6 +41,7 @@ public class Main extends JavaPlugin {
     public static boolean allPlayersFrozen = false;
     public static BukkitTask freezePurgeTask = null;
     public static Map<Player, Double> fuckoffEnabledFor = new HashMap<Player, Double>();
+    private Main instance;
     
     @Override
     public void onLoad()
@@ -67,6 +68,11 @@ public class Main extends JavaPlugin {
 	}
         
         
+    public Main getInstance()
+    {
+    	this.instance = this;
+    }
+    
     //Default (Command) No Permissions
     public static void noPermission(Player player)
     {
