@@ -1,266 +1,212 @@
 package me.Paldiu.NNO.Commands;
 
-import me.Paldiu.NNO.Main;
-import com.google.common.collect.Lists;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
+import net.camtech.camutils.CUtils_Methods;
+import net.camtech.fopmremastered.FOPMR_Rank;
+import net.camtech.fopmremastered.FOPMR_Rank.Rank;
+import static me.Paldiu.NNO.Main.plugin;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.SimpleCommandMap;
+import org.bukkit.command.TabExecutor;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Method;
-import java.util.HashMap;
+public abstract class CommandController implements CommandExecutor, TabExecutor
+{
 
-public class CommandController implements CommandExecutor {
+    protected static CommandMap cmap;
+    protected final String command;
+    protected final String description;
+    protected final List<String> alias;
+    protected final String usage;
+    protected final String permMessage;
+    protected final Rank rank;
 
-	/**
-	 * @author AmoebaMan
-	 * <p/>
-	 * All credits go to AmoebaMan for this handling of Commands via Annotations; It's an easier implementation, and allows a skip of the verifications
-	 * that normally come with something like this
-	 */
-	private final static HashMap<Command, Object> handlers = new HashMap<Command, Object>();
-	private final static HashMap<Command, Method> methods = new HashMap<Command, Method>();
-	private final static HashMap<String, SubCommand> subCommands = new HashMap<String, SubCommand>();
-	private final static HashMap<String, Object> subHandlers = new HashMap<String, Object>();
-	private final static HashMap<String, Method> subMethods = new HashMap<String, Method>();
+    public CommandController(String command)
+    {
+        this(command, null, null, null, null, Rank.OP);
+    }
 
-	/**
-	 * Registers all command handlers and subcommand handlers in a class, matching them with their corresponding commands and subcommands registered to the specified plugin.
-	 *
-	 * @param plugin  The plugin whose commands will be considered for registration
-	 * @param handler An instance of the class whose methods will be considered for registration
-	 */
-	public static void registerCommands(JavaPlugin plugin, Object handler) {
+    public CommandController(String command, String usage)
+    {
+        this(command, usage, null, null, null, Rank.OP);
+    }
 
-		for (Method method : handler.getClass().getMethods()) {
-			Class<?>[] params = method.getParameterTypes();
-			if (params.length == 2 && CommandSender.class.isAssignableFrom(params[0]) && String[].class.equals(params[1])) {
+    public CommandController(String command, String usage, String description)
+    {
+        this(command, usage, description, null, null, Rank.OP);
+    }
 
-				if (isCommandHandler(method)) {
-					CommandHandler annotation = method.getAnnotation(CommandHandler.class);
-					if (plugin.getCommand(annotation.name()) != null) {
-						plugin.getCommand(annotation.name()).setExecutor(new CommandController());
-						if (!(annotation.aliases().equals(new String[]{""}))) {
-							plugin.getCommand(annotation.name()).setAliases(Lists.newArrayList(annotation.aliases()));
-						}
-						if (!annotation.description().equals("")) {
-							plugin.getCommand(annotation.name()).setDescription(annotation.description());
-						}
-						if (!annotation.usage().equals("")) {
-							plugin.getCommand(annotation.name()).setUsage(annotation.usage());
-						}
-						if (!annotation.permission().equals("")) {
-							plugin.getCommand(annotation.name()).setPermission(annotation.permission());
-						}
-						if (!annotation.permissionMessage().equals("")) {
-							plugin.getCommand(annotation.name()).setPermissionMessage(ChatColor.RED + annotation.permissionMessage());
-						}
-						handlers.put(plugin.getCommand(annotation.name()), handler);
-						methods.put(plugin.getCommand(annotation.name()), method);
-					}
-				}
+    public CommandController(String command, String usage, String description, String permissionMessage)
+    {
+        this(command, usage, description, permissionMessage, null, Rank.OP);
+    }
 
-				if (isSubCommandHandler(method)) {
-					SubCommandHandler annotation = method.getAnnotation(SubCommandHandler.class);
-					if (plugin.getCommand(annotation.parent()) != null) {
-						plugin.getCommand(annotation.parent()).setExecutor(new CommandController());
-						SubCommand subCommand = new SubCommand(plugin.getCommand(annotation.parent()), annotation.name());
-						subCommand.permission = annotation.permission();
-						subCommand.permissionMessage = annotation.permissionMessage();
-						subCommands.put(subCommand.toString(), subCommand);
-						subHandlers.put(subCommand.toString(), handler);
-						subMethods.put(subCommand.toString(), method);
-					}
-				}
-			}
-		}
-	}
+    public CommandController(String command, String usage, String description, List<String> aliases)
+    {
+        this(command, usage, description, null, aliases, Rank.OP);
+    }
 
-	/**
-	 * @author AmoebaMan
-	 *         An annotation interface that may be attached to a method to designate it as a command handler.
-	 *         When registering a handler with this class, only methods marked with this annotation will be considered for command registration.
-	 */
-	@Retention(RetentionPolicy.RUNTIME)
-	public static @interface CommandHandler {
-		String name();
+    public CommandController(String command, String usage, String description, Rank rank)
+    {
+        this(command, usage, description, null, null, rank);
+    }
 
-		String[] aliases() default {""};
+    public CommandController(String command, String usage, String description, String permissionMessage, Rank rank)
+    {
+        this(command, usage, description, permissionMessage, null, rank);
+    }
 
-		String description() default "";
+    public CommandController(String command, String usage, String description, List<String> aliases, Rank rank)
+    {
+        this(command, usage, description, null, aliases, rank);
+    }
 
-		String usage() default "";
+    public CommandController(String command, String usage, String description, String permissionMessage, List<String> aliases, Rank rank)
+    {
+        this.command = command.toLowerCase();
+        this.usage = usage;
+        this.description = description;
+        this.permMessage = permissionMessage;
+        this.alias = aliases;
+        this.rank = rank;
+    }
 
-		String permission() default "";
+    public void register()
+    {
+        ReflectCommand cmd = new ReflectCommand(this.command);
+        if (this.alias != null)
+        {
+            cmd.setAliases(this.alias);
+        }
+        if (this.description != null)
+        {
+            cmd.setDescription(this.description);
+        }
+        if (this.usage != null)
+        {
+            cmd.setUsage(this.usage);
+        }
+        if (this.permMessage != null)
+        {
+            cmd.setPermissionMessage(this.permMessage);
+        }
+        if (!getCommandMap().register("", cmd))
+        {
+            this.unRegisterBukkitCommand(Bukkit.getPluginCommand(cmd.getName()));
+            getCommandMap().register("", cmd);
+        }
+        cmd.setExecutor(this);
+    }
 
-		String permissionMessage() default Messages.MESSAGE_PREFIX + "You do not have permission for this command, if you believe this is an error please fill out a bug report on our forums.";
-	}
+    final CommandMap getCommandMap()
+    {
+        if (cmap == null)
+        {
+            try
+            {
+                final Field f = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+                f.setAccessible(true);
+                cmap = (CommandMap) f.get(Bukkit.getServer());
+                return getCommandMap();
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        else if (cmap != null)
+        {
+            return cmap;
+        }
+        return getCommandMap();
+    }
 
-	/**
-	 * Tests if a method is a command handler
-	 */
-	private static boolean isCommandHandler(Method method) {
-		return method.getAnnotation(CommandHandler.class) != null;
-	}
+    public abstract boolean onCommand(CommandSender sender, Command cmd, String label, String[] args);
 
-	/**
-	 * @author AmoebaMan
-	 *         An annotation interface that may be attached to a method to designate it as a subcommand handler.
-	 *         When registering a handler with this class, only methods marked with this annotation will be considered for subcommand registration.
-	 */
-	@Retention(RetentionPolicy.RUNTIME)
-	public static @interface SubCommandHandler {
-		String parent();
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args)
+    {
+        return null;
+    }
 
-		String name();
+    private Object getPrivateField(Object object, String field) throws SecurityException,
+            NoSuchFieldException, IllegalArgumentException, IllegalAccessException
+    {
+        Class<?> cls = object.getClass();
+        Field objectField = cls.getDeclaredField(field);
+        objectField.setAccessible(true);
+        Object result = objectField.get(object);
+        objectField.setAccessible(false);
+        return result;
+    }
 
-		String permission() default "";
+    private void unRegisterBukkitCommand(PluginCommand cmd)
+    {
+        try
+        {
+            Object result = getPrivateField(plugin.getServer().getPluginManager(), "commandMap");
+            SimpleCommandMap commandMap = (SimpleCommandMap) result;
+            Object map = getPrivateField(commandMap, "knownCommands");
+            @SuppressWarnings("unchecked")
+            HashMap<String, Command> knownCommands = (HashMap<String, Command>) map;
+            knownCommands.remove(cmd.getName());
+            for (String registeredalias : cmd.getAliases())
+            {
+                knownCommands.remove(registeredalias);
+            }
+        } catch (SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
-		String permissionMessage() default Messages.MESSAGE_PREFIX + "You do not have permission for this command, if you believe this is an error please fill out a bug report on our forums.";
-	}
+    public final class ReflectCommand extends Command
+    {
 
-	/**
-	 * Tests if a method is a subcommand handler
-	 */
-	private static boolean isSubCommandHandler(Method method) {
-		return method.getAnnotation(SubCommandHandler.class) != null;
-	}
+        private CommandController exe = null;
 
-	/**
-	 * A class for representing subcommands
-	 */
-	private static class SubCommand {
-		public final Command superCommand;
-		public final String subCommand;
-		public String permission;
-		public String permissionMessage;
+        protected ReflectCommand(String command)
+        {
+            super(command);
+        }
 
-		public SubCommand(Command superCommand, String subCommand) {
-			this.superCommand = superCommand;
-			this.subCommand = subCommand.toLowerCase();
-		}
+        public void setExecutor(CommandController exe)
+        {
+            this.exe = exe;
+        }
 
-		public boolean equals(Object x) {
-			return toString().equals(x.toString());
-		}
+        @Override
+        public boolean execute(CommandSender sender, String commandLabel, String[] args)
+        {
+            if (exe != null)
+            {
+                if (!CommandPermissions.hasPermission(sender, permission)
+                {
+                    return true;
+                }
+                if (!exe.onCommand(sender, this, commandLabel, args))
+                {
+                    sender.sendMessage(this.usageMessage.replaceAll("<command>", command));
+                    return false;
+                }
+                return true;
+            }
+            return false;
+        }
 
-		public String toString() {
-			return (superCommand.getName() + " " + subCommand).trim();
-		}
-	}
-
-	/**
-	 * This is the method that "officially" processes commands, but in reality it will always delegate responsibility to the handlers and methods assigned to the command or subcommand
-	 * Beyond checking permissions, checking player/console sending, and invoking handlers and methods, this method does not actually act on the commands
-	 */
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		/*
-		 * If a subcommand may be present...
-         */
-		if (args.length > 0) {
-			/*
-			 * Get the subcommand given and the handler and method attached to it
-             */
-			SubCommand subCommand = new SubCommand(command, args[0]);
-			subCommand = subCommands.get(subCommand.toString());
-            /*
-             * If and only if the subcommand actually exists...
-             */
-			if (subCommand != null) {
-				Object subHandler = subHandlers.get(subCommand.toString());
-				Method subMethod = subMethods.get(subCommand.toString());
-                /*
-                 * If and only if both handler and method exist...
-                 */
-				if (subHandler != null && subMethod != null) {
-                    /*
-                     * Reorder the arguments so we don't resend the subcommand
-                     */
-					String[] subArgs = new String[args.length - 1];
-					for (int i = 1; i < args.length; i++) {
-						subArgs[i - 1] = args[i];
-					}
-                    /*
-                     * If the method requires a player and the subcommand wasn't sent by one, don't continue
-                     */
-					if (subMethod.getParameterTypes()[0].equals(Player.class) && !(sender instanceof Player)) {
-						sender.sendMessage(ChatColor.RED + "This command requires a player sender");
-						return true;
-					}
-                    /*
-                     * If the method requires a console and the subcommand wasn't sent by one, don't continue
-                     */
-					if (subMethod.getParameterTypes()[0].equals(ConsoleCommandSender.class) && !(sender instanceof ConsoleCommandSender)) {
-						sender.sendMessage(ChatColor.RED + "This command requires a console sender");
-						return true;
-					}
-                    /*
-                     * If a permission is attached to this subcommand and the sender doens't have it, don't continue
-                     */
-					if (!subCommand.permission.isEmpty() && !sender.hasPermission(subCommand.permission)) {
-						sender.sendMessage(ChatColor.RED + subCommand.permissionMessage);
-						return true;
-					}
-                    /*
-                     * Try to process the command
-                     */
-					try {
-						subMethod.invoke(subHandler, sender, args);
-					} catch (Exception e) {
-						sender.sendMessage(ChatColor.RED + Messages.MESSAGE_PREFIX + "There was an error while processing this command; Please check the syntax used, and if it persists fill out a bug report on our forums.");
-						e.printStackTrace();
-					}
-					return true;
-				}
-			}
-		}
-        /*
-         * If a subcommand was successfully executed, the command will not reach this point
-         * Get the handler and method attached to this command
-         */
-		Object handler = handlers.get(command);
-		Method method = methods.get(command);
-        /*
-         * If and only if both handler and method exist...
-         */
-		if (handler != null && method != null) {
-            /*
-             * If the method requires a player and the command wasn't sent by one, don't continue
-             */
-			if (method.getParameterTypes()[0].equals(Player.class) && !(sender instanceof Player)) {
-				sender.sendMessage(ChatColor.RED + "This command requires a player sender");
-				return true;
-			}
-            /*
-             * If the method requires a console and the command wasn't sent by one, don't continue
-             */
-			if (method.getParameterTypes()[0].equals(ConsoleCommandSender.class) && !(sender instanceof ConsoleCommandSender)) {
-				sender.sendMessage(ChatColor.RED + "This command requires a console sender");
-				return true;
-			}
-            /*
-             * Try to process the command
-             */
-			try {
-				method.invoke(handler, sender, args);
-			} catch (Exception e) {
-				sender.sendMessage(ChatColor.RED + Messages.MESSAGE_PREFIX + "There was an error while processing this command; Please check the syntax used, and if it persists fill out a bug report on our forums.");
-				e.printStackTrace();
-			}
-		}
-        /*
-         * Otherwise we have to fake not recognising the command
-         */
-		else {
-			sender.sendMessage("Unknown command. Type \"/help\" for help.");
-		}
-
-		return true;
-	}
-
+        @Override
+        public List<String> tabComplete(CommandSender sender, String alias, String[] args)
+        {
+            if (exe != null)
+            {
+                return exe.onTabComplete(sender, this, alias, args);
+            }
+            return null;
+        }
+    }
 }
