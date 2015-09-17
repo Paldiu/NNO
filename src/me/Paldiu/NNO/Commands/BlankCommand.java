@@ -1,10 +1,10 @@
-package net.camtech.fopmremastered.commands;
+package me.Paldiu.NNO.Commands;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.camtech.fopmremastered.FOPMR_Rank.Rank;
+import me.Paldiu.NNO.Commands.CommandPermissions;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 //thanks to Camzie99 for this!
@@ -14,9 +14,9 @@ public class BlankCommand extends CommandController
     Class cls;
     Object object;
 
-    public BlankCommand(String name, String usage, String description, List<String> aliases, CommandPermission permission, Class cls) throws NoSuchMethodException
+    public BlankCommand(String name, String usage, String description, List<String> aliases, CommandPermissions permission, Class cls) throws NoSuchMethodException
     {
-        super(name, usage, description, aliases, rank);
+        super(name, usage, description, aliases, permissions);
         this.cls = cls;
         try
         {
