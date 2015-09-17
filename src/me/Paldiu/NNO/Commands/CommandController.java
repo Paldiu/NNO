@@ -124,7 +124,7 @@ public abstract class CommandController implements CommandExecutor, TabExecutor
         return getCommandMap();
     }
 
-    public abstract boolean onCommand(CommandSender sender, Command cmd, String label, String[] args);
+    public abstract boolean onCommand(CommandSender sender, Command cmd, String label, String[] args, boolean isConsole);
 
     public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args)
     {
