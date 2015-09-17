@@ -14,6 +14,9 @@ public class CommandPermissions {
 	private String permPrefix = "nno.";
 	private String permission;
 	private String defaultLevel = false;
+	
+	private static boolean isConsole;
+	
 	private final JavaPlugin plugin;
 	private final String fileName;
 	private File permissionsFile;
@@ -73,13 +76,14 @@ public class CommandPermissions {
         }
     }
 
-	public static void hasPermission(CommandSender sender, String permission) {
+	public static void hasPermission(CommandSender sender, String permission, boolean isConsole) {
 		this.permission = permPrefix + permission;
-		if (!sender.hasPermission(this.permission) && (sender instanceof Player)) {
+		this.isConsole = isConsole;
+		if (!sender.hasPermission(this.permission) && (isConsole = false)) {
 			sender.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 			return true;
 		}
-		else if (!(sender instanceof Player)){
+		else if (isConsole = true)){
 			continue;
 		}
 		else {
