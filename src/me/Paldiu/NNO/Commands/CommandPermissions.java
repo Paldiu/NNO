@@ -35,23 +35,19 @@ public class CommandPermissions {
 		this.permissionsFile = new File(plugin.getDataFolder(), fileName());
 	}
 	
-	public void reloadPermissions()
-    {
+	public void reloadPermissions() {
         fileConfiguration = YamlConfiguration.loadConfiguration(permissionsFile);
 
         // Look for defaults in the jar
         InputStream defConfigStream = plugin.getResource(fileName);
-        if(defConfigStream != null)
-        {
+        if(defConfigStream != null) {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
             fileConfiguration.setDefaults(defConfig);
         }
     }
 
-    public FileConfiguration getPermissions()
-    {
-        if(fileConfiguration == null)
-        {
+    public FileConfiguration getPermissions() {
+        if(fileConfiguration == null) {
             this.reloadPermissions();
         }
         return fileConfiguration;
@@ -71,10 +67,8 @@ public class CommandPermissions {
         }
     }
 
-    public void saveDefaultPermissions()
-    {
-        if(!permissionsFile.exists())
-        {
+    public void saveDefaultPermissions() {
+        if(!permissionsFile.exists()) {
             this.plugin.saveResource(fileName, false);
         }
     }
@@ -91,46 +85,5 @@ public class CommandPermissions {
 		else {
 			continue;
 		}
-	}
-	
-	private void writePermissions()
-	{
-		Pattern cls = Pattern.compile("me/Paldiu/NNO/Commands/(Command_[^\\$]+)\\.class");
-		CodeSource codeSource = Main.class.getProtectionDomain().getCodeSource();
-            if (codeSource != null)
-            {
-                ZipInputStream zip = new ZipInputStream(codeSource.getLocation().openStream());
-                ZipEntry zipEntry;
-                while ((zipEntry = zip.getNextEntry()) != null)
-                {
-                    String entryName = zipEntry.getName();
-                    Matcher matcher = cls.matcher(entryName);
-                    if (matcher.find())
-                    {
-                        if (matcher.find())
-                        {
-                            try
-                            {
-                                Class<?> commandClass = Class.forName("me.Paldiu.NNO.Commands." + matcher.group(1));
-                                if (commandClass.isAnnotationPresent(CommandParameters.class))
-                                {
-                                    String permission = permPrefix + commandClass.toString();
-                    	            getPermissions().addEntry("nno.*: ").append("default: false");
-                            	    getPermissions().addEntry(permission + ": ").append("default: " + defaultLevel);
-                                }
-                                else
-                                {
-                                    throw new Exception("Unknown exception occurred.");
-                                    continue;
-                                }
-                            } 
-                            catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
-                            {
-                                Bukkit.broadcastMessage("" + ex);
-                            }
-                        }
-                    }
-                }
-            }
 	}
 }
