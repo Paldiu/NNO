@@ -15,5 +15,5 @@ public @interface CommandParameters
 
     String aliases() default "";
 
-    CommandPermissions permissions() default ;
+    CommandPermissions permission() default CommandPermissions.defaultLevel;
 }
