@@ -1,1 +1,9 @@
 #PERMISSIONS FILE
+permissions:
+  nno.*:
+    description: All permission labels
+    default: false
+  nno.achgiv:
+    description: Achgiv permission
+    default: false
+  
