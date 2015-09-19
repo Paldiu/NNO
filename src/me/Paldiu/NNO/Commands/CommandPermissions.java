@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class CommandPermissions {
 	private String permPrefix = "nno.";
 	private String permission;
-	private String defaultLevel = false;
+	private String defaultLevel = "false";
 	
 	private static boolean isConsole;
 	
