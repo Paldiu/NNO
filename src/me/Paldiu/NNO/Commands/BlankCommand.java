@@ -28,11 +28,19 @@ public class BlankCommand extends CommandController
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args, boolean isConsole)
     {
+        if (sender instanceof Player)
+        {
+            isConsole = false;
+        }
+        else if (!(sender instanceof Player)
+        {
+            isConsole = true;
+        }
         try
         {
-            return (boolean) cls.getMethod("onCommand", CommandSender.class, Command.class, String.class, String[].class).invoke(object, sender, cmd, label, args);
+            return (boolean) cls.getMethod("onCommand", CommandSender.class, Command.class, String.class, String[].class, Boolean.class).invoke(object, sender, cmd, label, args, isConsole);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
         {
             Logger.getLogger(BlankCommand.class.getName()).log(Level.SEVERE, null, ex);
