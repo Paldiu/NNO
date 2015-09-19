@@ -65,14 +65,14 @@ public abstract class CommandController implements CommandExecutor, TabExecutor
         this(command, usage, description, null, aliases, rank);
     }
 
-    public CommandController(String command, String usage, String description, String permissionMessage, List<String> aliases, Rank rank)
+    public CommandController(String command, String usage, String description, String permissionMessage, List<String> aliases, CommandPermissions permission)
     {
         this.command = command.toLowerCase();
         this.usage = usage;
         this.description = description;
         this.permMessage = permissionMessage;
         this.alias = aliases;
-        this.rank = rank;
+        this.permission = permission;
     }
 
     public void register()
@@ -126,7 +126,7 @@ public abstract class CommandController implements CommandExecutor, TabExecutor
 
     public abstract boolean onCommand(CommandSender sender, Command cmd, String label, String[] args, boolean isConsole);
 
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args)
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args, boolean isConsole)
     {
         return null;
     }
