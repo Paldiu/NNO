@@ -22,55 +22,28 @@ public abstract class CommandController implements CommandExecutor, TabExecutor
     protected final String description;
     protected final List<String> alias;
     protected final String usage;
-    protected final String permMessage;
-    protected final Rank rank;
+    protected final String permission;
 
-    public CommandController(String command)
+    public CommandController(String command, String permission)
     {
-        this(command, null, null, null, null, Rank.OP);
+        this(command, null, null, null, permission);
+    }
+    
+    public CommandController(String command, String usage, String permission)
+    {
+        this(command, usage, null, null, permission);
+    }
+    
+    public CommandController(String command, String usage, String description, String permission)
+    {
+        this(command, usage, description, null, permission);
     }
 
-    public CommandController(String command, String usage)
-    {
-        this(command, usage, null, null, null, Rank.OP);
-    }
-
-    public CommandController(String command, String usage, String description)
-    {
-        this(command, usage, description, null, null, Rank.OP);
-    }
-
-    public CommandController(String command, String usage, String description, String permissionMessage)
-    {
-        this(command, usage, description, permissionMessage, null, Rank.OP);
-    }
-
-    public CommandController(String command, String usage, String description, List<String> aliases)
-    {
-        this(command, usage, description, null, aliases, Rank.OP);
-    }
-
-    public CommandController(String command, String usage, String description, Rank rank)
-    {
-        this(command, usage, description, null, null, rank);
-    }
-
-    public CommandController(String command, String usage, String description, String permissionMessage, Rank rank)
-    {
-        this(command, usage, description, permissionMessage, null, rank);
-    }
-
-    public CommandController(String command, String usage, String description, List<String> aliases, Rank rank)
-    {
-        this(command, usage, description, null, aliases, rank);
-    }
-
-    public CommandController(String command, String usage, String description, String permissionMessage, List<String> aliases, CommandPermissions permission)
+    public CommandController(String command, String usage, String description, List<String> aliases, String permission)
     {
         this.command = command.toLowerCase();
         this.usage = usage;
         this.description = description;
-        this.permMessage = permissionMessage;
         this.alias = aliases;
         this.permission = permission;
     }
@@ -89,10 +62,6 @@ public abstract class CommandController implements CommandExecutor, TabExecutor
         if (this.usage != null)
         {
             cmd.setUsage(this.usage);
-        }
-        if (this.permMessage != null)
-        {
-            cmd.setPermissionMessage(this.permMessage);
         }
         if (!getCommandMap().register("", cmd))
         {
