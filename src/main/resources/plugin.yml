@@ -1,0 +1,5 @@
+name: NoNamedOrg
+description: A random plugin from 2013 made for the NNO server.
+version: 8.0
+main: io.github.paldiu.NNOPlugin
+author: Paldiu

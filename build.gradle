@@ -1,0 +1,64 @@
+plugins {
+    id "java"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+version project.properties["pluginVersion"]
+targetCompatibility = sourceCompatibility = JavaVersion.VERSION_17
+
+repositories {
+    mavenCentral()
+
+    //maven artifact repo urls
+    [
+            "https://jitpack.io",
+            "https://papermc.io/repo/repository/maven-public/",
+            "https://s01.oss.sonatype.org/content/groups/public/",
+            "https://oss.sonatype.org/content/groups/public/",
+    ].each { s ->
+        maven {
+            url s
+        }
+    }
+}
+
+dependencies {
+    //compile
+    [
+            "io.papermc.paper:paper-api:1.19-R0.1-SNAPSHOT",
+            "org.jetbrains:annotations:20.1.0",
+            "io.github.simplexdevelopment:SimplexCL:1.1.0",
+            "org.apache.commons:commons-lang3:3.7",
+            "org.reflections:reflections:0.9.10"
+    ].each {s ->
+        implementation s
+    }
+}
+
+shadowJar {
+    classifier project.properties["pluginJarClassifier"].toString()
+    baseName project.properties["pluginName"].toString()
+
+    //shading and relocation
+    [
+            "io.github.simplexdevelopment"
+    ].each {s ->
+        relocate s, "${project.properties["pluginMainPackage"]}.shaded.$s"
+    }
+}
+
+processResources {
+    //update resources when building
+    doFirst {
+        file("$buildDir/resources/main").listFiles().each {
+            it.delete()
+        }
+    }
+
+    //define variables
+    expand(
+            "pluginVersion": project.version,
+            "pluginName": project.properties["pluginName"],
+            "pluginMain": "${project.properties["pluginMainPackage"]}.${project.properties["pluginMain"]}"
+    )
+}

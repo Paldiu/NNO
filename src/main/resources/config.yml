@@ -1,0 +1,17 @@
+tossmob_enabled: true
+admin_only_mode: false
+    
+bypass_bans:
+  - smack17
+  - dethplaque
+  - bees_knees
+  - paldiu
+
+blocked_commands:
+  - ban
+  - kick
+  - ipban
+  - gcmd
+  - jelly
+  - nope
+  - lockup
